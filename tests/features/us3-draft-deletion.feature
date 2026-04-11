@@ -1,0 +1,1 @@
+/Users/raul.alzate/Documents/maestria/maestria/project/studio/specs/005-history-sidebar-draft/tests/features/us3-draft-deletion.feature

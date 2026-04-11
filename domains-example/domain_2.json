@@ -1,0 +1,1056 @@
+{
+  "nombre_proyecto": "Digitalizaci\u00f3n \u00daltima Milla Banco",
+  "version": "1.0.0",
+  "fecha_analisis": "2023-10-27",
+  "big_picture": {
+    "descripcion": "Proceso de entrega de productos financieros en la \u00faltima milla, desde la asignaci\u00f3n de paquetes hasta la activaci\u00f3n del producto, identificando puntos cr\u00edticos y oportunidades de mejora en la aplicaci\u00f3n FICOSA Entregas.",
+    "nodos": [
+      {
+        "id": "supervisor_logistica_bp",
+        "tipo_elemento": "Actor",
+        "nombre": "Supervisor de Log\u00edstica",
+        "descripcion": "Responsable de asignar paquetes de entrega a los oficiales.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "salesforce_bp",
+        "tipo_elemento": "Sistema Externo",
+        "nombre": "Salesforce",
+        "descripcion": "Sistema principal para la gesti\u00f3n de \u00f3rdenes de entrega y estado de paquetes.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "asignacion_manual_bp",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Asignaci\u00f3n Manual de Paquetes",
+        "descripcion": "Proceso manual de asignaci\u00f3n de rutas, propenso a errores y cuello de botella.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "oficial_entregas_bp",
+        "tipo_elemento": "Actor",
+        "nombre": "Oficial de Entregas",
+        "descripcion": "Persona encargada de realizar la entrega f\u00edsica del producto financiero.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "app_ficosa_entregas_bp",
+        "tipo_elemento": "Agregado",
+        "nombre": "App FICOSA Entregas",
+        "descripcion": "Aplicaci\u00f3n m\u00f3vil utilizada por el oficial para gestionar el proceso de entrega.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "cliente_bp",
+        "tipo_elemento": "Actor",
+        "nombre": "Cliente",
+        "descripcion": "Receptor final del producto financiero.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "verificacion_campo_bp",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Verificaci\u00f3n en Campo (Riesgo de Fraude)",
+        "descripcion": "Punto cr\u00edtico de seguridad debido a la falta de validaci\u00f3n biom\u00e9trica.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "recoleccion_evidencia_bp",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Recolecci\u00f3n de Evidencia (Flujo R\u00edgido)",
+        "descripcion": "Proceso de captura de fotos inflexible que obliga a tomar im\u00e1genes irrelevantes.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "firma_electronica_bp",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Firma Electr\u00f3nica (Dependencia Conectividad)",
+        "descripcion": "Proceso de firma digital que falla sin una conexi\u00f3n a internet estable, sin modo offline.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "cierre_entrega_bp",
+        "tipo_elemento": "Agregado",
+        "nombre": "Cierre de Entrega",
+        "descripcion": "Fase final donde se registra el \u00e9xito o fracaso de la entrega.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "oficial_activacion_bp",
+        "tipo_elemento": "Actor",
+        "nombre": "Oficial de Activaci\u00f3n",
+        "descripcion": "Persona encargada de activar el producto financiero despu\u00e9s de la entrega.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "activacion_manual_bp",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Activaci\u00f3n Manual de Producto",
+        "descripcion": "Proceso de activaci\u00f3n completamente manual y desconectado del flujo digital.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "tablero_activaciones_pendientes_bp",
+        "tipo_elemento": "Read Model",
+        "nombre": "Tablero de Activaciones Pendientes",
+        "descripcion": "Vista propuesta para automatizar la identificaci\u00f3n de entregas completadas que requieren activaci\u00f3n.",
+        "estado_comparativo": "nuevo",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      }
+    ],
+    "aristas": [
+      {
+        "fuente": "supervisor_logistica_bp",
+        "destino": "asignacion_manual_bp",
+        "descripcion": "realiza",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "asignacion_manual_bp",
+        "destino": "salesforce_bp",
+        "descripcion": "registra en",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "salesforce_bp",
+        "destino": "oficial_entregas_bp",
+        "descripcion": "asigna a",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "oficial_entregas_bp",
+        "destino": "app_ficosa_entregas_bp",
+        "descripcion": "usa",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "app_ficosa_entregas_bp",
+        "destino": "verificacion_campo_bp",
+        "descripcion": "inicia",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "verificacion_campo_bp",
+        "destino": "cliente_bp",
+        "descripcion": "interact\u00faa con",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "cliente_bp",
+        "destino": "recoleccion_evidencia_bp",
+        "descripcion": "aporta evidencia para",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "recoleccion_evidencia_bp",
+        "destino": "firma_electronica_bp",
+        "descripcion": "precede a",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "firma_electronica_bp",
+        "destino": "cierre_entrega_bp",
+        "descripcion": "concluye en",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "cierre_entrega_bp",
+        "destino": "salesforce_bp",
+        "descripcion": "actualiza estado en",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "salesforce_bp",
+        "destino": "oficial_activacion_bp",
+        "descripcion": "informa a (v\u00eda reportes)",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "oficial_activacion_bp",
+        "destino": "activacion_manual_bp",
+        "descripcion": "realiza",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "activacion_manual_bp",
+        "destino": "tablero_activaciones_pendientes_bp",
+        "descripcion": "requiere (soluci\u00f3n)",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "app_ficosa_entregas_bp",
+        "destino": "tablero_activaciones_pendientes_bp",
+        "descripcion": "alimenta (propuesto)",
+        "estado_comparativo": "existente"
+      }
+    ]
+  },
+  "agregados": [
+    {
+      "nombre_agregado": "Paquete de Entrega",
+      "entidad_raiz": "Paquete",
+      "descripcion": "Gestiona el ciclo de vida de un paquete de producto financiero, desde su asignaci\u00f3n por el supervisor hasta su entrega y registro final por el oficial, incluyendo la interacci\u00f3n con el cliente y sistemas externos.",
+      "nodos": [
+        {
+          "id": "supervisor_logistica",
+          "tipo_elemento": "Actor",
+          "nombre": "Supervisor de Log\u00edstica",
+          "descripcion": "Inicia el proceso de entrega asignando paquetes.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "salesforce",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "Salesforce",
+          "descripcion": "Sistema CRM y de gesti\u00f3n de \u00f3rdenes, fuente de verdad para el estado de las entregas.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_asignar_paquete",
+          "tipo_elemento": "Comando",
+          "nombre": "Asignar Paquete a Oficial",
+          "descripcion": "Solicitud para asignar un paquete de entrega a un oficial espec\u00edfico.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_paquete_asignado",
+          "tipo_elemento": "Evento",
+          "nombre": "Paquete Asignado a Oficial",
+          "descripcion": "Hecho de que un paquete ha sido asignado a un oficial.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot_asignacion_manual",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Asignaci\u00f3n Manual de Rutas",
+          "descripcion": "Proceso actual de asignaci\u00f3n de rutas es manual, propenso a errores y un cuello de botella operativo.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "oficial_entregas",
+          "tipo_elemento": "Actor",
+          "nombre": "Oficial de Entregas",
+          "descripcion": "Ejecuta las tareas de entrega en campo usando la aplicaci\u00f3n m\u00f3vil.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "app_ficosa",
+          "tipo_elemento": "Agregado",
+          "nombre": "App FICOSA Entregas",
+          "descripcion": "Aplicaci\u00f3n m\u00f3vil en Flutter para la gesti\u00f3n de entregas.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": [
+            "Flutter"
+          ],
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_iniciar_sesion",
+          "tipo_elemento": "Comando",
+          "nombre": "Iniciar Sesi\u00f3n",
+          "descripcion": "Solicitud del oficial para autenticarse en la aplicaci\u00f3n.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "azure_ad",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "Azure AD (Microsoft)",
+          "descripcion": "Sistema de autenticaci\u00f3n para el inicio de sesi\u00f3n de los oficiales.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_sesion_iniciada",
+          "tipo_elemento": "Evento",
+          "nombre": "Sesi\u00f3n Iniciada",
+          "descripcion": "Hecho de que un oficial ha iniciado sesi\u00f3n exitosamente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_consultar_entregas",
+          "tipo_elemento": "Comando",
+          "nombre": "Consultar Entregas Asignadas",
+          "descripcion": "Solicitud de la app para obtener la lista de entregas pendientes del oficial.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "read_model_lista_entregas",
+          "tipo_elemento": "Read Model",
+          "nombre": "Lista de Entregas del Oficial",
+          "descripcion": "Vista optimizada para el oficial con sus entregas asignadas, en ruta, entregadas y no entregadas.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "read_model"
+        },
+        {
+          "id": "hotspot_mantenibilidad_baja",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Mantenibilidad Baja de la App",
+          "descripcion": "La arquitectura actual de la app presenta 'code smells' y el antipatr\u00f3n 'Static State Sharing', dificultando el mantenimiento y la evoluci\u00f3n.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "cliente",
+          "tipo_elemento": "Actor",
+          "nombre": "Cliente",
+          "descripcion": "Participa en la verificaci\u00f3n de identidad y firma de documentos.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_escanear_codigo",
+          "tipo_elemento": "Comando",
+          "nombre": "Escanear C\u00f3digo de Barras",
+          "descripcion": "Solicitud para escanear el c\u00f3digo de barras de un paquete.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_codigo_escaneado",
+          "tipo_elemento": "Evento",
+          "nombre": "C\u00f3digo de Barras Escaneado",
+          "descripcion": "Hecho de que el c\u00f3digo de barras de un paquete ha sido escaneado.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_verificar_cliente",
+          "tipo_elemento": "Comando",
+          "nombre": "Verificar Cliente",
+          "descripcion": "Solicitud para validar la identidad del cliente receptor.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot_validacion_biometrica",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Falta de Validaci\u00f3n Biom\u00e9trica",
+          "descripcion": "La validaci\u00f3n de identidad es visual y manual, lo que representa un riesgo de fraude masivo.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_identidad_verificada",
+          "tipo_elemento": "Evento",
+          "nombre": "Identidad Verificada (Manual)",
+          "descripcion": "Hecho de que la identidad del cliente ha sido verificada (actualmente de forma manual).",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_capturar_fotografia",
+          "tipo_elemento": "Comando",
+          "nombre": "Capturar Fotograf\u00eda de Identificaci\u00f3n",
+          "descripcion": "Solicitud para tomar fotograf\u00edas de la identificaci\u00f3n y del cliente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot_rigidez_fotos",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Rigidez en Captura de Evidencia (3 fotos obligatorias)",
+          "descripcion": "El flujo de la app obliga a tomar tres fotos (anverso, reverso, selfie) incluso si el reverso no es relevante, llevando a 'fotos de la pared'.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_evidencia_capturada",
+          "tipo_elemento": "Evento",
+          "nombre": "Evidencia Fotogr\u00e1fica Capturada",
+          "descripcion": "Hecho de que una fotograf\u00eda ha sido tomada como evidencia.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "onbase",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "OnBase (Repositorio Documental)",
+          "descripcion": "Sistema externo para el almacenamiento e indexaci\u00f3n de documentos y evidencias.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_indexar_evidencia",
+          "tipo_elemento": "Comando",
+          "nombre": "Indexar Evidencia en OnBase",
+          "descripcion": "Solicitud para enviar la evidencia fotogr\u00e1fica al repositorio documental.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "fbdocs",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "FBDocs (Servicio de Documentos)",
+          "descripcion": "Servicio de Salesforce para la generaci\u00f3n din\u00e1mica de documentos PDF para firma.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_generar_documentos",
+          "tipo_elemento": "Comando",
+          "nombre": "Generar Documentos para Firma",
+          "descripcion": "Solicitud para crear los contratos en formato PDF para la firma electr\u00f3nica.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_documentos_generados",
+          "tipo_elemento": "Evento",
+          "nombre": "Documentos para Firma Generados",
+          "descripcion": "Hecho de que los documentos para la firma electr\u00f3nica han sido creados.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "onespan",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "OneSpan (Firmas Electr\u00f3nicas)",
+          "descripcion": "Sistema externo especializado en la gesti\u00f3n de firmas electr\u00f3nicas.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_solicitar_firma",
+          "tipo_elemento": "Comando",
+          "nombre": "Solicitar Firma Electr\u00f3nica",
+          "descripcion": "Solicitud para que el cliente firme digitalmente los documentos.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot_dependencia_conexion",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Dependencia de Conexi\u00f3n Estable (Firma)",
+          "descripcion": "El proceso de firma electr\u00f3nica depende al 100% de una conexi\u00f3n a internet estable, sin modo offline, lo que genera fallos y reprogramaciones.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_documento_firmado",
+          "tipo_elemento": "Evento",
+          "nombre": "Documento Firmado Digitalmente",
+          "descripcion": "Hecho de que el cliente ha firmado los documentos electr\u00f3nicamente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_finalizar_entrega_exitosa",
+          "tipo_elemento": "Comando",
+          "nombre": "Finalizar Entrega Exitosa",
+          "descripcion": "Solicitud para registrar una entrega como completada, capturando geolocalizaci\u00f3n.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_reportar_entrega_fallida",
+          "tipo_elemento": "Comando",
+          "nombre": "Reportar Entrega Fallida",
+          "descripcion": "Solicitud para registrar una entrega como fallida, indicando el motivo.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_entrega_completada",
+          "tipo_elemento": "Evento",
+          "nombre": "Entrega Completada",
+          "descripcion": "Hecho de que la entrega ha sido finalizada con \u00e9xito.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento_entrega_fallida_reportada",
+          "tipo_elemento": "Evento",
+          "nombre": "Entrega Fallida Reportada",
+          "descripcion": "Hecho de que una entrega ha sido reportada como fallida.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "politica_actualizar_salesforce",
+          "tipo_elemento": "Pol\u00edtica",
+          "nombre": "Actualizar Estado en Salesforce",
+          "descripcion": "Pol\u00edtica que actualiza el estado del paquete en Salesforce tras una entrega completada o fallida.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot_alerta_manual",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Alerta Manual (Entrega con Excepci\u00f3n)",
+          "descripcion": "Mecanismo reactivo para marcar entregas con excepciones, sin medidas preventivas subyacentes.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "oficial_activacion",
+          "tipo_elemento": "Actor",
+          "nombre": "Oficial de Activaci\u00f3n",
+          "descripcion": "Responsable de la activaci\u00f3n final del producto financiero en la oficina.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot_activacion_manual",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Activaci\u00f3n Manual de Producto",
+          "descripcion": "Proceso de activaci\u00f3n completamente manual y desconectado del flujo digital, ineficiente y propenso a demoras.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando_generar_reportes_activacion",
+          "tipo_elemento": "Comando",
+          "nombre": "Generar Reportes de Activaci\u00f3n",
+          "descripcion": "Comando ejecutado por el oficial de activaci\u00f3n para buscar entregas completadas manualmente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "read_model_tablero_activaciones",
+          "tipo_elemento": "Read Model",
+          "nombre": "Tablero de Activaciones Pendientes",
+          "descripcion": "Vista propuesta para mostrar en tiempo real las entregas completadas que requieren activaci\u00f3n, automatizando el proceso.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "read_model"
+        },
+        {
+          "id": "solucion_repositorio_datos",
+          "tipo_elemento": "Agregado",
+          "nombre": "Repositorio de Datos Local (App)",
+          "descripcion": "Componente propuesto para centralizar la l\u00f3gica de sincronizaci\u00f3n y el modo offline en la app m\u00f3vil.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "solucion_capa_apis_orquestador",
+          "tipo_elemento": "Agregado",
+          "nombre": "Capa Media de APIs (Orquestador)",
+          "descripcion": "Componente propuesto para que la capa de APIs act\u00fae como orquestador de sistemas externos, simplificando la app.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "solucion_sql_elite",
+          "tipo_elemento": "Regla de Negocio",
+          "nombre": "SQL Elite (Base de Datos Local)",
+          "descripcion": "Tecnolog\u00eda propuesta para implementar una base de datos local robusta en la app para el modo offline.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": [
+            "SQL Elite"
+          ],
+          "nivel": "process_level"
+        },
+        {
+          "id": "solucion_observabilidad",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Falta de Observabilidad (Login y Monitoreo)",
+          "descripcion": "Necesidad de implementar un sistema robusto de login y monitoreo para tener visibilidad en tiempo real de la app en campo.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "solucion_resiliencia_offline",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Resiliencia y Modo Offline",
+          "descripcion": "Requisito no funcional cr\u00edtico para la operaci\u00f3n de la app, permitiendo funcionar sin conexi\u00f3n estable.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "solucion_seguridad_biometrica",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Seguridad (Validaci\u00f3n Biom\u00e9trica)",
+          "descripcion": "Requisito no funcional cr\u00edtico para integrar validaci\u00f3n biom\u00e9trica y mitigar el riesgo de fraude.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "futuro_plataforma_cliente",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Plataforma de Experiencia para el Cliente",
+          "descripcion": "Visi\u00f3n futura de transformar la app en una plataforma donde el cliente sea un actor principal desde el inicio, mejorando la log\u00edstica y la relaci\u00f3n con el banco.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        }
+      ],
+      "aristas": [
+        {
+          "fuente": "supervisor_logistica",
+          "destino": "comando_asignar_paquete",
+          "descripcion": "ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_asignar_paquete",
+          "destino": "salesforce",
+          "descripcion": "registra en",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "salesforce",
+          "destino": "evento_paquete_asignado",
+          "descripcion": "produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_paquete_asignado",
+          "destino": "hotspot_asignacion_manual",
+          "descripcion": "es resultado de",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "oficial_entregas",
+          "destino": "comando_iniciar_sesion",
+          "descripcion": "ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_iniciar_sesion",
+          "destino": "azure_ad",
+          "descripcion": "autentica con",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "azure_ad",
+          "destino": "evento_sesion_iniciada",
+          "descripcion": "confirma",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_sesion_iniciada",
+          "destino": "app_ficosa",
+          "descripcion": "permite acceso a",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "app_ficosa",
+          "destino": "comando_consultar_entregas",
+          "descripcion": "env\u00eda",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_consultar_entregas",
+          "destino": "salesforce",
+          "descripcion": "consulta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "salesforce",
+          "destino": "read_model_lista_entregas",
+          "descripcion": "proyecta en",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "read_model_lista_entregas",
+          "destino": "oficial_entregas",
+          "descripcion": "muestra a",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "app_ficosa",
+          "destino": "hotspot_mantenibilidad_baja",
+          "descripcion": "presenta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "oficial_entregas",
+          "destino": "comando_escanear_codigo",
+          "descripcion": "ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_escanear_codigo",
+          "destino": "app_ficosa",
+          "descripcion": "procesa",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "app_ficosa",
+          "destino": "evento_codigo_escaneado",
+          "descripcion": "produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_codigo_escaneado",
+          "destino": "comando_verificar_cliente",
+          "descripcion": "dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_verificar_cliente",
+          "destino": "hotspot_validacion_biometrica",
+          "descripcion": "es afectado por",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot_validacion_biometrica",
+          "destino": "evento_identidad_verificada",
+          "descripcion": "resulta en (manual)",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "oficial_entregas",
+          "destino": "comando_capturar_fotografia",
+          "descripcion": "ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_capturar_fotografia",
+          "destino": "hotspot_rigidez_fotos",
+          "descripcion": "es afectado por",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot_rigidez_fotos",
+          "destino": "evento_evidencia_capturada",
+          "descripcion": "produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_evidencia_capturada",
+          "destino": "comando_indexar_evidencia",
+          "descripcion": "dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_indexar_evidencia",
+          "destino": "onbase",
+          "descripcion": "registra en",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_identidad_verificada",
+          "destino": "comando_generar_documentos",
+          "descripcion": "dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_generar_documentos",
+          "destino": "salesforce",
+          "descripcion": "solicita a",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "salesforce",
+          "destino": "fbdocs",
+          "descripcion": "usa",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "fbdocs",
+          "destino": "evento_documentos_generados",
+          "descripcion": "produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_documentos_generados",
+          "destino": "comando_solicitar_firma",
+          "descripcion": "dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_solicitar_firma",
+          "destino": "onespan",
+          "descripcion": "interact\u00faa con",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "onespan",
+          "destino": "hotspot_dependencia_conexion",
+          "descripcion": "es afectado por",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot_dependencia_conexion",
+          "destino": "evento_documento_firmado",
+          "descripcion": "produce (si hay conexi\u00f3n)",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "cliente",
+          "destino": "comando_solicitar_firma",
+          "descripcion": "ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "oficial_entregas",
+          "destino": "comando_finalizar_entrega_exitosa",
+          "descripcion": "ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "oficial_entregas",
+          "destino": "comando_reportar_entrega_fallida",
+          "descripcion": "ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_finalizar_entrega_exitosa",
+          "destino": "evento_entrega_completada",
+          "descripcion": "produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_reportar_entrega_fallida",
+          "destino": "evento_entrega_fallida_reportada",
+          "descripcion": "produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_entrega_completada",
+          "destino": "politica_actualizar_salesforce",
+          "descripcion": "activa",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_entrega_fallida_reportada",
+          "destino": "politica_actualizar_salesforce",
+          "descripcion": "activa",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "politica_actualizar_salesforce",
+          "destino": "salesforce",
+          "descripcion": "actualiza",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_reportar_entrega_fallida",
+          "destino": "hotspot_alerta_manual",
+          "descripcion": "es parte de",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "oficial_activacion",
+          "destino": "hotspot_activacion_manual",
+          "descripcion": "realiza",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot_activacion_manual",
+          "destino": "comando_generar_reportes_activacion",
+          "descripcion": "implica",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando_generar_reportes_activacion",
+          "destino": "salesforce",
+          "descripcion": "consulta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento_entrega_completada",
+          "destino": "read_model_tablero_activaciones",
+          "descripcion": "alimenta (propuesto)",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "app_ficosa",
+          "destino": "solucion_repositorio_datos",
+          "descripcion": "deber\u00eda integrar",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "solucion_repositorio_datos",
+          "destino": "solucion_sql_elite",
+          "descripcion": "usa",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "app_ficosa",
+          "destino": "solucion_capa_apis_orquestador",
+          "descripcion": "deber\u00eda comunicarse con",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "solucion_capa_apis_orquestador",
+          "destino": "salesforce",
+          "descripcion": "orquesta con",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "solucion_capa_apis_orquestador",
+          "destino": "onbase",
+          "descripcion": "orquesta con",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "solucion_capa_apis_orquestador",
+          "destino": "onespan",
+          "descripcion": "orquesta con",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "app_ficosa",
+          "destino": "solucion_resiliencia_offline",
+          "descripcion": "requiere",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "app_ficosa",
+          "destino": "solucion_seguridad_biometrica",
+          "descripcion": "requiere",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "app_ficosa",
+          "destino": "solucion_observabilidad",
+          "descripcion": "requiere",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "futuro_plataforma_cliente",
+          "destino": "cliente",
+          "descripcion": "empodera a",
+          "estado_comparativo": "existente"
+        }
+      ]
+    }
+  ],
+  "read_models": [
+    {
+      "nombre": "Lista de Entregas del Oficial",
+      "descripcion": "Vista optimizada para el oficial de entregas con las tareas asignadas, separadas por estado (En ruta, Entregado, No entregados).",
+      "proyecta": [
+        "evento_paquete_asignado",
+        "evento_entrega_completada",
+        "evento_entrega_fallida_reportada"
+      ],
+      "ui_policies": null,
+      "tecnologias": [
+        "Flutter"
+      ]
+    },
+    {
+      "nombre": "Tablero de Activaciones Pendientes",
+      "descripcion": "Vista propuesta para el oficial de activaci\u00f3n que muestra en tiempo real las entregas completadas que requieren activaci\u00f3n de producto.",
+      "proyecta": [
+        "evento_entrega_completada"
+      ],
+      "ui_policies": [
+        "Notificaciones en tiempo real"
+      ],
+      "tecnologias": null
+    }
+  ],
+  "politicas_inter_agregados": [
+    {
+      "fuente": "evento_evidencia_capturada",
+      "destino": "comando_indexar_evidencia",
+      "descripcion": "Cuando se captura evidencia fotogr\u00e1fica, se dispara la indexaci\u00f3n en OnBase.",
+      "estado_comparativo": "existente"
+    },
+    {
+      "fuente": "evento_identidad_verificada",
+      "destino": "comando_generar_documentos",
+      "descripcion": "Tras la verificaci\u00f3n de identidad, se generan los documentos para la firma electr\u00f3nica.",
+      "estado_comparativo": "existente"
+    },
+    {
+      "fuente": "evento_documentos_generados",
+      "destino": "comando_solicitar_firma",
+      "descripcion": "Una vez generados los documentos, se solicita la firma electr\u00f3nica al cliente.",
+      "estado_comparativo": "existente"
+    },
+    {
+      "fuente": "evento_entrega_completada",
+      "destino": "politica_actualizar_salesforce",
+      "descripcion": "Cuando una entrega es completada, se actualiza su estado en Salesforce.",
+      "estado_comparativo": "existente"
+    },
+    {
+      "fuente": "evento_entrega_fallida_reportada",
+      "destino": "politica_actualizar_salesforce",
+      "descripcion": "Cuando una entrega es reportada como fallida, se actualiza su estado en Salesforce.",
+      "estado_comparativo": "existente"
+    }
+  ],
+  "responsables": [
+    "Analista",
+    "Equipo de Producto",
+    "Equipo de Desarrollo"
+  ],
+  "notas": "El an\u00e1lisis revela una fuerte dependencia de sistemas externos y una arquitectura de aplicaci\u00f3n m\u00f3vil con desaf\u00edos de mantenibilidad. Los hotspots identificados representan riesgos operacionales y de seguridad significativos. La visi\u00f3n a futuro apunta a una transformaci\u00f3n hacia una plataforma centrada en el cliente.",
+  "ddd_specs": null,
+  "transcript": "A ver, hablemos de digitalizar la \u00faltima milla de un banco. Que suena como algo simple, \u00bfno? Exacto. Pero no estamos hablando de entregar una pizza o un paquete cualquiera. Para nada. Estamos hablando de entregar un producto financiero, una tarjeta, un pr\u00e9stamo, algo con validez legal con seguridad. Claro. Y con una eficiencia que tiene que ser impecable. Y la escala es enorme. Seg\u00fan las fuentes que tenemos, son m\u00e1s de 15,000 entregas al mes. 15,000. Y es un proceso que a cada oficial le puede tomar hasta 6 horas de su d\u00eda. 6 horas. Es una locura. El costo oculto en esas horas es, bueno, es gigantesco. Por eso hoy vamos a tomar un caso real. La aplicaci\u00f3n FICOSA entregas. Exacto. Y la vamos a poner bajo la lupa. Tenemos de todo, \u00bfeh? Diagramas t\u00e9cnicos, documentos de negocio, un an\u00e1lisis forense del c\u00f3digo de la app. Hasta transcripciones de reuniones internas. Para construir, digamos, una l\u00ednea de tiempo. Un mapa que nos muestre cada paso, cada actor, cada sistema. De principio a fin. Me gusta. Es como poner un gran tablero en la pared y empezar a conectar los puntos, \u00bfno? Justo eso. Para ver la historia completa. El objetivo es destilar toda esta informaci\u00f3n y entender no s\u00f3lo c\u00f3mo funciona hoy, sino y creo que es lo m\u00e1s importante. \u00bfD\u00f3nde est\u00e1n sus puntos d\u00e9biles? Sus talones de Aquiles y c\u00f3mo se podr\u00eda mejorar. Perfecto. Pues empecemos a poner los post-its en ese tablero. Dale. Y el primer post-it, curiosamente, no lo ponemos en la calle. \u00bfAh, no? No. Lo ponemos en una oficina. El proceso arranca con el supervisor de log\u00edstica. Y su herramienta principal, seg\u00fan los documentos, es un sistema externo que es, digamos, el coraz\u00f3n de todo. Salesforce. Salesforce. Ah\u00ed es donde nace cada orden de entreba. Espera un momento. Entonces, el primer paso es un supervisor que, seg\u00fan entiendo de las transcripciones, asigna manualmente cada paquete. A cada oficial. Estamos diciendo que un banco con miles de entregas asigna las rutas a mano. Como si fuera, no s\u00e9, una pizzer\u00eda de barrio. Exactamente as\u00ed. El primer movimiento en nuestro mapa es lo que llamar\u00edamos un comando. El supervisor ejecuta la acci\u00f3n de asignar paquete a oficial dentro de Salesforce. Y eso genera el primer evento importante. \u00bfQue ser\u00eda como un sello digital? Es un sello digital que dice paquete asignado a oficial. Y a partir de ah\u00ed esa orden de entrega ya tiene un responsable. Pero s\u00ed, tienes toda la raz\u00f3n. Este es nuestro primer gran hotspot. \u00bfEs que es un punto cr\u00edtico, no? Totalmente. Parece una omisi\u00f3n gigante. Un solo error ah\u00ed por la ma\u00f1ana te puede desviar la ruta de un oficial por horas. Es que es un proceso heredado que depende al 100% del criterio humano. Un cuello de botella y un riesgo operativo enorme. Gigante. Es algo que ya existe, pero que pide a gritos una optimizaci\u00f3n. Pero bueno, una vez que el supervisor da clic, el testigo digital pasa a la calle. Bien, ahora s\u00ed. El testigo est\u00e1 en manos del oficial de entregas. Saca su dispositivo, abre el app. Y lo primero, claro, es iniciar sesi\u00f3n. Y aqu\u00ed la app se conecta a otro sistema externo, Azure AD de Microsoft, para autenticarlo. Bueno, al menos eso es un buen punto de seguridad. Single sign on. Est\u00e1 bien manejado. S\u00ed, eso s\u00ed. Una vez dentro, el oficial ve su tablero de batalla del d\u00eda. La vista de la app es muy simple. Una lista de entregas en tres columnas. En ruta, entregado y no entregados. Y para que esa lista aparezca, me imagino que la app le pide al sistema consulta entregas asignadas. Exacto. Y lo que pasa por detr\u00e1s es interesante. El sistema toma todos esos eventos de paquete asignado a oficial de la oficina y los proyecta en una lista de tareas simple para el oficial. Lo que ser\u00eda un ritm\u00f3dil. Un ritm\u00f3dil, s\u00ed. Una lista de entregas del oficial, optimizada para \u00e9l. OK, todo esto en la app m\u00f3vil que ya existe, que est\u00e1 hecha en Flutter. Y aqu\u00ed es donde las cosas se ponen complicadas, \u00bfno? Se ponen complicadas. El an\u00e1lisis de c\u00f3digo que tenemos es brutalmente honesto. Califica la mantenibilidad como baja media. Un diagn\u00f3stico duro, s\u00ed. El informe se\u00f1ala lo que llama code smells, olores de c\u00f3digo. \u00bfQu\u00e9 son? Bueno, son malas pr\u00e1cticas que indican problemas m\u00e1s profundos. \u00bfY cu\u00e1l es la principal? Que la l\u00f3gica de negocio, o sea, las reglas de c\u00f3mo funciona una entrega, est\u00e1 mezclada directamente con la interfaz de usuario, con los botones, las pantallas. Y menciona un antipatr\u00f3n con un nombre que suena terrible. Static State Sharing. \u00bfQu\u00e9 significa eso en cristiano? A ver, imagina que en lugar de pasarte una nota a ti, yo le escribo en una pizarra p\u00fablica en medio de la oficina. \u00bfD\u00f3nde cualquiera puede verla y cambiarla? Exacto. Cualquiera puede leerla, cambiarla o borrarla. Es un atajo r\u00e1pido, pero es una pesadilla para encontrar errores. Si algo sale mal, es casi imposible saber qui\u00e9n cambi\u00f3 el mensaje o por qu\u00e9. Una bomba de tiempo para el mantenimiento. Totalmente. Entiendo. Es una app que funciona, un MVP que sali\u00f3 r\u00e1pido, pero que ahora muestra las grietas de esa prisa. Unas grietas que se ponen a prueba cuando el oficial, bueno, llega a la puerta del cliente. Claro, entramos en la fase 3. La verificaci\u00f3n en campo, el momento de la verdad. El primer momento de la verdad, s\u00ed. El oficial escanea el c\u00f3digo de barras del paquete. Eso dispara el comando escanear c\u00f3digo de barras. El sistema responde, confirma que es el paquete correcto, muestra los detalles y luego viene el paso crucial, verificar cliente. Y aqu\u00ed nos topamos con otro hotspot. Pero este no es un punto cr\u00edtico. Es un agujero de seguridad del tama\u00f1o de un cr\u00e1ter. Las transcripciones de las reuniones son expl\u00edcitas en esto. Clar\u00edsimas. El MVP actual no tiene ninguna validaci\u00f3n biom\u00e9trica contra sistemas externos. O sea, el oficial simplemente mira la c\u00e9dula de identidad y conf\u00eda. Conf\u00eda en que la persona que tiene enfrente es quien dice ser. Es un riesgo de fraude masivo. La regla de negocio de validar la identidad se cumple de forma visual, humana. En las notas de planificaci\u00f3n, la integraci\u00f3n biom\u00e9trica es el requerimiento n\u00famero uno para el futuro, \u00bfno? El n\u00famero uno. Es algo que se tiene que construir desde cero y es de m\u00e1xima prioridad. Incre\u00edble. Bueno, sigamos. Una vez que el oficial, digamos, conf\u00eda en la identidad, tiene que recolectar la evidencia. Aqu\u00ed ejecuta la acci\u00f3n de capturar fotograf\u00eda de identificaci\u00f3n. Y seg\u00fan la documentaci\u00f3n, la regla es estricta. Se necesitan tres fotos. Anverso del documento, reverso y una selfie del cliente con su identificaci\u00f3n. Pero aqu\u00ed es donde la rigidez del software choca con el desorden del mundo real. \u00bfA qu\u00e9 te refieres? En una de las conversaciones grabadas, un analista cuenta algo fascinante. \u00bfQu\u00e9 pasa si el documento es un pasaporte? Que no tiene informaci\u00f3n relevante en el reverso. Exacto. Pero el flujo de la app es tan r\u00edgido que obliga al oficial a tomar tres fotos. S\u00ed o s\u00ed. Espera. \u00bfY qu\u00e9 hacen? \u00bfCu\u00e1l es el parche de campo para eso? O mal y lo que llaman una foto del entorno. Una foto de la pared, de una planta, lo que sea. \u00bfNo puede ser? S\u00ed. Solo para cumplir con el requisito de la app. Obviamente esa foto no tiene ning\u00fan valor probatorio ni legal. Es absurdo. Es evidencia a un dise\u00f1o poqu\u00edsimo flexible. Totalmente. Pero bueno, cada foto que se toma, v\u00e1lida o no, genera un evento. Evidencia fotogr\u00e1fica capturada. Y esto activa una pol\u00edtica del sistema, \u00bfcierto? S\u00ed, una pol\u00edtica autom\u00e1tica. Por cada foto guardada se dispara un comando para indexar evidencia en OnBase. OnBase, el repositorio documental del banco. El mismo. \u00bfQu\u00e9 es otro sistema externo? Por suerte, esta integraci\u00f3n ya existe y parece que funciona de manera bastante robusta. Bueno, al menos algo funciona bien. Ahora llegamos al momento de mayor valor legal. Y seg\u00fan las fuentes, tambi\u00e9n el m\u00e1s fr\u00e1gil de todo el proceso. La firma electr\u00f3nica. Aqu\u00ed el protagonista es el cliente que tiene que firmar en el dispositivo del oficial. Y en este punto, la app tiene que hacer malabares. Tiene que hablar con dos sistemas externos a la vez. Dos m\u00e1s. Dos m\u00e1s. Primero ejecuta un comando para generar documentos para firma. Esto se conecta con Salesforce, que tiene un servicio, es FBDocs, para crear los contratos en PDF. Din\u00e1micamente. Din\u00e1micamente. Y una vez que los documentos est\u00e1n listos, la app se integra con un tercer sistema, OneSpan, que es el especialista en firmas electr\u00f3nicas. Y el comando final es solicitar firma electr\u00f3nica. Y si todo sale bien, el cliente firma y se registra el evento documento firmado digitalmente. Pero aqu\u00ed es donde las fuentes describen el tal\u00f3n de Aquiles de toda la operaci\u00f3n. Lo es. La transcripci\u00f3n de una reuni\u00f3n de producto lo deja dolorosamente claro. La conexi\u00f3n a internet. La conexi\u00f3n a internet. Todo este flujo de firma depende al 100% de una conexi\u00f3n estable. Si la conexi\u00f3n se cae o es d\u00e9bil, todo falla. Y la entrega tiene que ser reprogramada. O sea, no existe un modo offline. Cero, nada. Y eso en nuestros pa\u00edses, donde la conectividad m\u00f3vil no es perfecta, sobre todo fuera de las grandes ciudades, es una locura. Es un riesgo operacional gigante. Una zona sin cobertura puede costar miles en entregas fallidas, horas de oficial perdidas y clientes, bueno, incre\u00edblemente frustrados. Esta dependencia es la mayor amenaza para escalar la operaci\u00f3n. Sin duda, la capacidad offline es el requisito no funcional m\u00e1s cr\u00edtico de todo el an\u00e1lisis. Es algo que se debe crear desde cero. \u00bfY hay m\u00e1s, no? Las notas mencionan mejoras futuras para la firma. S\u00ed, permitir que el cliente firme desde su propio celular, con un enlace, para no tener que pasarle el dispositivo del oficial, que tambi\u00e9n es un riesgo de seguridad y, bueno, de higiene. Totalmente. Superado el Everest de la firma con conexi\u00f3n, \u00bfqu\u00e9 sigue? El cierre. El oficial retoma el control y ejecuta una de dos acciones, finalizar entrega exitosa que captura la geolocalizaci\u00f3n. Como prueba. Como prueba, s\u00ed. O reportar entrega fallida, donde puede elegir motivos como cliente rechaz\u00f3 o direcci\u00f3n no encontrada. Y cada acci\u00f3n genera su propio evento, entrega completada o entrega fallida reportada. Exacto. Y de nuevo, se activa una pol\u00edtica autom\u00e1tica. Cualquiera de esos 12 eventos dispara una actualizaci\u00f3n de estado en Salesforce. Salesforce otra vez, como la fuente de la verdad del estado final. Siempre Salesforce. Las fuentes mencionan un caso interesante aqu\u00ed, la entrega con excepci\u00f3n. \u00bfQu\u00e9 es eso? Si al se sienten riesgo, la instrucci\u00f3n es entregar el producto para no escalar la situaci\u00f3n. Pero. Pero marca la entrega con esa excepci\u00f3n en la app. Es una alerta manual. Un proceso totalmente reactivo. Un parche que demuestra la necesidad urgente de medidas preventivas, como la biometr\u00eda que mencionamos. Exactamente. Y justo cuando pensamos que ya acab\u00f3 el viaje, el mapa nos revela una \u00faltima fase. Una que demuestra una desconexi\u00f3n total en el proceso. La activaci\u00f3n manual. Para el cliente y el oficial, la historia termin\u00f3. Pero para el banco, falta el paso m\u00e1s importante, activar el producto. Y el actor aqu\u00ed es otra persona. Un oficial de activaci\u00f3n en una oficina. Y el hotspot es que este proceso es, es completamente manual y est\u00e1 desconectado de todo el flujo digital que acabamos de describir. Es como ocurrir un marat\u00f3n digital. Y al cruzar la meta, tener que esperar a que alguien se d\u00e9 cuenta de que llegaste para darte la medalla. Es una analog\u00eda perfecta. Las transcripciones lo confirman. El oficial de activaci\u00f3n tiene que generar reportes en Salesforce cada cierto tiempo para buscar manualmente las entregas completadas. No hay notificaciones. No hay un flujo de trabajo autom\u00e1tico. Nada. Es ineficiente y propenso a demoras. La automatizaci\u00f3n de eso es un incremental clave que se menciona. \u00bfY qu\u00e9 se necesita crear? Un tablero de activaciones pendientes. Una nueva vista que se alimente en tiempo real del evento entrega completada. Eso cerrar\u00eda el ciclo de verdad. OK, mapeado todo el proceso de negocio. El tablero est\u00e1 lleno de post-its y de hilos rojos. Ahora, traduzcamos esto a arquitectura. \u00bfC\u00f3mo deber\u00eda evolucionar el sistema para solucionar todo esto? El reporte de evaluaci\u00f3n del c\u00f3digo es el punto de partida. Diagnostica que la app flora actual tiene una arquitectura en capa simple, pero con una separaci\u00f3n de responsabilidades muy d\u00e9bil. Por eso, la mantenibilidad baja media. Por eso mismo, la recomendaci\u00f3n principal es migrar. Migrar a qu\u00e9? A una arquitectura limpia o a un patr\u00f3n de gesti\u00f3n de estado m\u00e1s robusto, como Block o Riverpad, que son muy populares en Flora. A ver, una analog\u00eda para entenderlo. Es como pasar de tener una cocina donde todos los ingredientes y utensilios est\u00e1n en una sola caja a tener una cocina de chef profesional. Con estaciones separadas para todo. Exacto. Estaciones para cortar, para cocinar, para emplatar, todo ordenado, m\u00e1s eficiente. Y si algo se quema en una sart\u00e9n, no te arruina toda la comida. Se trata de desacoplar las responsabilidades para que sistema sea testable y pueda crecer. Y que no se rompa en el proceso. Bien, y en t\u00e9rminos pr\u00e1cticos, \u00bfqu\u00e9 piezas de software hay que construir o modificar? A nivel de la app m\u00f3vil, el cambio m\u00e1s grande es refactorizarla para meter un repositorio de datos. OK. \u00bfY qu\u00e9 har\u00eda ese repositorio? Ser\u00eda la \u00fanica pieza encargada de hablar con el exterior y de gestionar toda la l\u00f3gica de sincronizaci\u00f3n y el modo offline. Ser\u00eda, digamos, el cerebro de la app. \u00bfY en el lado del servidor del banco? La capa media de APIs tiene que dejar de ser un simple pasamanos y convertirse en un orquestador de verdad. O sea que la app no hable con Salesforce, OnBase y OneSpan directamente. Nunca m\u00e1s. Que hable solo con esta capa media y que esa capa se encargue de hacer los malabares. Esto simplifica la app y centraliza la l\u00f3gica. \u00bfTiene sentido? \u00bfY para el modo offline? Para el modo offline es fundamental que la app tenga una base de datos local de verdad, como SQL Elite. El uso actual de shared preferences es como usar un post-it. Necesitamos una libreta de notas completa para guardar una gesti\u00f3n entera sin conexi\u00f3n. Si tuvieras que poner en una pizarra los tres requisitos no funcionales m\u00e1s importantes, \u00bfcu\u00e1les ser\u00edan? N\u00famero uno, sin la menor duda. Resiliencia y modo offline. Es la necesidad m\u00e1s cr\u00edtica la que m\u00e1s valor de negocio aporta. N\u00famero dos, seguridad. Integrar la validaci\u00f3n biometrica no es opcional. Es fundamental para proteger al banco y a los clientes del fraude. \u00bfY el tercero? Observabilidad. Implementar un sistema de login y monitoreo robusto para saber qu\u00e9 pasa en la app de cada oficial en tiempo real. Hoy, si algo falla, dependen de que el oficial llame. Necesitan tener ojos en el campo. Muy bien. Recapitulemos. Desarmamos un proceso de negocio complejo y, y vimos c\u00f3mo mapearlo, revela todas sus costuras. S\u00ed, pasamos de una simple lista de funcionalidades a entender la din\u00e1mica real del negocio. Los comandos que inician acciones, los eventos que marcan el progreso y las pol\u00edticas que conectan todo el ecosistema de sistemas. Y este mapa nos muestra con una claridad brutal que los mayores desaf\u00edos no est\u00e1n en las pantallas. Los problemas de verdad est\u00e1n en la orquestaci\u00f3n de m\u00faltiples sistemas externos y, sobre todo, en c\u00f3mo lidiar con las imperfecciones del mundo real. Como la falta de una buena se\u00f1al de internet. Como eso, exactamente. Ha sido un an\u00e1lisis incre\u00edblemente detallado. Trazamos el flujo, identificamos los puntos d\u00e9biles y esbozamos un camino t\u00e9cnico claro para su evoluci\u00f3n. Y todo esto me deja con un pensamiento final, \u00bfsabes? A ver. Si leemos entre l\u00edneas en las notas sobre mejoras futuras, se insin\u00faa una evoluci\u00f3n natural de todo esto. \u00bfCu\u00e1l? Pasar de ser una herramienta para el oficial a convertirse en una plataforma de experiencia para el cliente. La pregunta que queda flotando es, \u00bfc\u00f3mo cambiar\u00eda todo este mapa de eventos que construimos si el cliente fuera un actor principal desde el inicio? Interesante. Si pudiera rastrear su entrega, coordinar la hora o incluso prevalidar su identidad con una selfie desde su propio celular horas antes de que llegue el oficial. Cambiar\u00eda todo. Es que no solo optimizar\u00eda la log\u00edstica a niveles impensados, sino que transformar\u00eda por completo la relaci\u00f3n del banco con su cliente en el momento m\u00e1s tangible y humano de todos. El momento de la entrega."
+}

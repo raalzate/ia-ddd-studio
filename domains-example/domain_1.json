@@ -1,0 +1,1038 @@
+{
+  "nombre_proyecto": "Digitalizaci\u00f3n \u00daltima Milla Bancaria",
+  "version": "1.0.0",
+  "fecha_analisis": "2023-10-27",
+  "big_picture": {
+    "descripcion": "El proceso de digitalizaci\u00f3n de la \u00faltima milla bancaria implica la entrega de productos financieros con validez legal y seguridad. Inicia con la asignaci\u00f3n manual de paquetes por un supervisor, contin\u00faa con la gesti\u00f3n del oficial de entregas en campo, incluyendo verificaci\u00f3n de cliente, recolecci\u00f3n de evidencia y firma electr\u00f3nica, y finaliza con la activaci\u00f3n manual del producto por un oficial de activaci\u00f3n. Se identifican m\u00faltiples hotspots relacionados con la automatizaci\u00f3n, seguridad y conectividad.",
+    "nodos": [
+      {
+        "id": "actor-supervisor-logistica",
+        "tipo_elemento": "Actor",
+        "nombre": "Supervisor de Log\u00edstica",
+        "descripcion": "Responsable de asignar manualmente los paquetes a los oficiales de entrega.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "sistema-salesforce",
+        "tipo_elemento": "Sistema Externo",
+        "nombre": "Salesforce",
+        "descripcion": "Sistema principal donde nacen las \u00f3rdenes de entrega y se gestiona el estado final.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": [
+          "CRM"
+        ],
+        "nivel": "big_picture"
+      },
+      {
+        "id": "hotspot-asignacion-manual",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Asignaci\u00f3n Manual de Rutas",
+        "descripcion": "Punto cr\u00edtico y riesgo operativo debido a la dependencia del criterio humano para la asignaci\u00f3n de paquetes.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "agregado-entrega-bp",
+        "tipo_elemento": "Agregado",
+        "nombre": "Entrega",
+        "descripcion": "Agregado central que gestiona el ciclo de vida de una entrega de producto financiero.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": [
+          "Flutter"
+        ],
+        "nivel": "big_picture"
+      },
+      {
+        "id": "actor-oficial-entregas",
+        "tipo_elemento": "Actor",
+        "nombre": "Oficial de Entregas",
+        "descripcion": "Persona encargada de realizar la entrega en campo usando la aplicaci\u00f3n m\u00f3vil.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "sistema-azure-ad",
+        "tipo_elemento": "Sistema Externo",
+        "nombre": "Azure AD (Microsoft)",
+        "descripcion": "Sistema de autenticaci\u00f3n para los oficiales de entrega (Single Sign On).",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": [
+          "Azure",
+          "Microsoft"
+        ],
+        "nivel": "big_picture"
+      },
+      {
+        "id": "hotspot-validacion-biometrica",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Falta de Validaci\u00f3n Biom\u00e9trica",
+        "descripcion": "Agujero de seguridad cr\u00edtico; la verificaci\u00f3n de identidad del cliente es manual y visual, sin biometr\u00eda.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "sistema-onbase",
+        "tipo_elemento": "Sistema Externo",
+        "nombre": "OnBase",
+        "descripcion": "Repositorio documental del banco para indexar la evidencia fotogr\u00e1fica.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "hotspot-rigidez-fotos",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Rigidez del Flujo de Fotos",
+        "descripcion": "La aplicaci\u00f3n obliga a tomar un n\u00famero fijo de fotos, incluso si no son relevantes, generando evidencia sin valor probatorio.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "actor-cliente",
+        "tipo_elemento": "Actor",
+        "nombre": "Cliente",
+        "descripcion": "Receptor del producto financiero y participante en la firma electr\u00f3nica.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "sistema-fbdocs",
+        "tipo_elemento": "Sistema Externo",
+        "nombre": "FBDocs",
+        "descripcion": "Servicio de Salesforce para generar din\u00e1micamente los contratos en PDF para la firma.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": [
+          "Salesforce"
+        ],
+        "nivel": "big_picture"
+      },
+      {
+        "id": "sistema-onespan",
+        "tipo_elemento": "Sistema Externo",
+        "nombre": "OneSpan",
+        "descripcion": "Sistema especialista en firmas electr\u00f3nicas.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "hotspot-dependencia-internet",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Dependencia de Conexi\u00f3n a Internet",
+        "descripcion": "El flujo de firma electr\u00f3nica falla completamente sin una conexi\u00f3n estable, causando reprogramaciones y frustraci\u00f3n.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "actor-oficial-activacion",
+        "tipo_elemento": "Actor",
+        "nombre": "Oficial de Activaci\u00f3n",
+        "descripcion": "Persona en oficina responsable de activar manualmente los productos financieros post-entrega.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      },
+      {
+        "id": "hotspot-activacion-manual",
+        "tipo_elemento": "Hotspot",
+        "nombre": "Activaci\u00f3n Manual de Producto",
+        "descripcion": "Proceso completamente manual y desconectado del flujo digital, ineficiente y propenso a demoras.",
+        "estado_comparativo": "existente",
+        "tags_tecnologia": null,
+        "nivel": "big_picture"
+      }
+    ],
+    "aristas": [
+      {
+        "fuente": "actor-supervisor-logistica",
+        "destino": "sistema-salesforce",
+        "descripcion": "Asigna paquete en",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "sistema-salesforce",
+        "destino": "agregado-entrega-bp",
+        "descripcion": "Genera orden de entrega para",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "agregado-entrega-bp",
+        "destino": "actor-oficial-entregas",
+        "descripcion": "Es utilizada por",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "actor-oficial-entregas",
+        "destino": "agregado-entrega-bp",
+        "descripcion": "Inicia sesi\u00f3n en",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "agregado-entrega-bp",
+        "destino": "sistema-azure-ad",
+        "descripcion": "Autentica oficial con",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "actor-oficial-entregas",
+        "destino": "agregado-entrega-bp",
+        "descripcion": "Realiza verificaci\u00f3n en campo con",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "agregado-entrega-bp",
+        "destino": "sistema-onbase",
+        "descripcion": "Indexa evidencia en",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "actor-cliente",
+        "destino": "agregado-entrega-bp",
+        "descripcion": "Firma electr\u00f3nicamente en",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "agregado-entrega-bp",
+        "destino": "sistema-fbdocs",
+        "descripcion": "Genera documentos para firma con",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "agregado-entrega-bp",
+        "destino": "sistema-onespan",
+        "descripcion": "Gestiona firma con",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "agregado-entrega-bp",
+        "destino": "sistema-salesforce",
+        "descripcion": "Actualiza estado final en",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "sistema-salesforce",
+        "destino": "actor-oficial-activacion",
+        "descripcion": "Provee reportes para",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "hotspot-asignacion-manual",
+        "destino": "sistema-salesforce",
+        "descripcion": "Problema en el proceso de",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "hotspot-validacion-biometrica",
+        "destino": "agregado-entrega-bp",
+        "descripcion": "Es un riesgo en la",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "hotspot-rigidez-fotos",
+        "destino": "agregado-entrega-bp",
+        "descripcion": "Es un problema en la",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "hotspot-dependencia-internet",
+        "destino": "agregado-entrega-bp",
+        "descripcion": "Afecta la firma en la",
+        "estado_comparativo": "existente"
+      },
+      {
+        "fuente": "hotspot-activacion-manual",
+        "destino": "actor-oficial-activacion",
+        "descripcion": "Es un problema para el",
+        "estado_comparativo": "existente"
+      }
+    ]
+  },
+  "agregados": [
+    {
+      "nombre_agregado": "Entrega",
+      "entidad_raiz": "Orden de Entrega",
+      "descripcion": "Gestiona el ciclo de vida de una entrega de producto financiero, desde su asignaci\u00f3n hasta su finalizaci\u00f3n y activaci\u00f3n, asegurando la validez legal y la seguridad.",
+      "nodos": [
+        {
+          "id": "actor-supervisor-logistica-pl",
+          "tipo_elemento": "Actor",
+          "nombre": "Supervisor de Log\u00edstica",
+          "descripcion": "Inicia el proceso de asignaci\u00f3n de paquetes.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-asignar-paquete",
+          "tipo_elemento": "Comando",
+          "nombre": "Asignar Paquete a Oficial",
+          "descripcion": "Solicitud para asignar un paquete a un oficial de entrega espec\u00edfico.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "entidad-orden-entrega",
+          "tipo_elemento": "Entidad Ra\u00edz",
+          "nombre": "Orden de Entrega",
+          "descripcion": "Representa la unidad de trabajo principal del agregado, con su estado y detalles del paquete.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-paquete-asignado",
+          "tipo_elemento": "Evento",
+          "nombre": "Paquete Asignado a Oficial",
+          "descripcion": "Hecho de que un paquete ha sido asignado a un oficial.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "actor-oficial-entregas-pl",
+          "tipo_elemento": "Actor",
+          "nombre": "Oficial de Entregas",
+          "descripcion": "Ejecuta las acciones en campo a trav\u00e9s de la aplicaci\u00f3n m\u00f3vil.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-iniciar-sesion",
+          "tipo_elemento": "Comando",
+          "nombre": "Iniciar Sesi\u00f3n",
+          "descripcion": "Solicitud para autenticar al oficial en la aplicaci\u00f3n.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "sistema-azure-ad-pl",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "Azure AD (Microsoft)",
+          "descripcion": "Sistema de autenticaci\u00f3n para el oficial.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": [
+            "Azure",
+            "Microsoft"
+          ],
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-sesion-iniciada",
+          "tipo_elemento": "Evento",
+          "nombre": "Sesi\u00f3n Iniciada",
+          "descripcion": "Hecho de que el oficial ha iniciado sesi\u00f3n exitosamente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-consultar-entregas",
+          "tipo_elemento": "Comando",
+          "nombre": "Consultar Entregas Asignadas",
+          "descripcion": "Solicitud para obtener la lista de entregas pendientes para el oficial.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-entregas-consultadas",
+          "tipo_elemento": "Evento",
+          "nombre": "Entregas Asignadas Consultadas",
+          "descripcion": "Hecho de que la lista de entregas ha sido recuperada.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-escanear-codigo",
+          "tipo_elemento": "Comando",
+          "nombre": "Escanear C\u00f3digo de Barras",
+          "descripcion": "Solicitud para escanear el c\u00f3digo de barras de un paquete.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-codigo-escaneado",
+          "tipo_elemento": "Evento",
+          "nombre": "C\u00f3digo de Barras Escaneado",
+          "descripcion": "Hecho de que el c\u00f3digo de barras del paquete ha sido escaneado.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-verificar-cliente",
+          "tipo_elemento": "Comando",
+          "nombre": "Verificar Cliente",
+          "descripcion": "Solicitud para validar la identidad del cliente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-cliente-verificado",
+          "tipo_elemento": "Evento",
+          "nombre": "Cliente Verificado",
+          "descripcion": "Hecho de que la identidad del cliente ha sido verificada (actualmente visual).",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "regla-validacion-biometrica",
+          "tipo_elemento": "Regla de Negocio",
+          "nombre": "Validaci\u00f3n Biom\u00e9trica",
+          "descripcion": "Requerimiento futuro para integrar validaci\u00f3n biom\u00e9trica en la verificaci\u00f3n de identidad.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-capturar-fotografia",
+          "tipo_elemento": "Comando",
+          "nombre": "Capturar Fotograf\u00eda de Identificaci\u00f3n",
+          "descripcion": "Solicitud para tomar fotos de la identificaci\u00f3n y del cliente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-evidencia-capturada",
+          "tipo_elemento": "Evento",
+          "nombre": "Evidencia Fotogr\u00e1fica Capturada",
+          "descripcion": "Hecho de que las fotograf\u00edas requeridas han sido tomadas.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "politica-indexacion-evidencia",
+          "tipo_elemento": "Pol\u00edtica",
+          "nombre": "Pol\u00edtica de Indexaci\u00f3n de Evidencia",
+          "descripcion": "Regla: Cuando Evidencia Fotogr\u00e1fica Capturada, entonces Indexar Evidencia.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-indexar-evidencia",
+          "tipo_elemento": "Comando",
+          "nombre": "Indexar Evidencia",
+          "descripcion": "Solicitud para enviar la evidencia fotogr\u00e1fica al repositorio documental.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "sistema-onbase-pl",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "OnBase",
+          "descripcion": "Repositorio documental del banco.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "actor-cliente-pl",
+          "tipo_elemento": "Actor",
+          "nombre": "Cliente",
+          "descripcion": "Participa en la firma electr\u00f3nica.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-generar-documentos",
+          "tipo_elemento": "Comando",
+          "nombre": "Generar Documentos para Firma",
+          "descripcion": "Solicitud para crear los contratos en PDF din\u00e1micamente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "sistema-fbdocs-pl",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "FBDocs",
+          "descripcion": "Servicio para la generaci\u00f3n de documentos.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": [
+            "Salesforce"
+          ],
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-documentos-generados",
+          "tipo_elemento": "Evento",
+          "nombre": "Documentos para Firma Generados",
+          "descripcion": "Hecho de que los documentos para la firma han sido creados.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-solicitar-firma",
+          "tipo_elemento": "Comando",
+          "nombre": "Solicitar Firma Electr\u00f3nica",
+          "descripcion": "Solicitud para iniciar el proceso de firma con el cliente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "sistema-onespan-pl",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "OneSpan",
+          "descripcion": "Sistema especialista en firmas electr\u00f3nicas.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-documento-firmado",
+          "tipo_elemento": "Evento",
+          "nombre": "Documento Firmado Digitalmente",
+          "descripcion": "Hecho de que el cliente ha firmado el documento electr\u00f3nicamente.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-finalizar-entrega-exitosa",
+          "tipo_elemento": "Comando",
+          "nombre": "Finalizar Entrega Exitosa",
+          "descripcion": "Solicitud para registrar una entrega como completada, capturando geolocalizaci\u00f3n.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-reportar-entrega-fallida",
+          "tipo_elemento": "Comando",
+          "nombre": "Reportar Entrega Fallida",
+          "descripcion": "Solicitud para registrar una entrega como fallida, con un motivo.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-entrega-completada",
+          "tipo_elemento": "Evento",
+          "nombre": "Entrega Completada",
+          "descripcion": "Hecho de que la entrega ha sido finalizada con \u00e9xito.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "evento-entrega-fallida-reportada",
+          "tipo_elemento": "Evento",
+          "nombre": "Entrega Fallida Reportada",
+          "descripcion": "Hecho de que la entrega ha sido registrada como fallida.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "politica-actualizacion-estado",
+          "tipo_elemento": "Pol\u00edtica",
+          "nombre": "Pol\u00edtica de Actualizaci\u00f3n de Estado",
+          "descripcion": "Regla: Cuando Entrega Completada o Entrega Fallida Reportada, entonces Actualizar Estado en Salesforce.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-actualizar-estado-salesforce",
+          "tipo_elemento": "Comando",
+          "nombre": "Actualizar Estado en Salesforce",
+          "descripcion": "Solicitud para sincronizar el estado final de la entrega con Salesforce.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "sistema-salesforce-pl",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "Salesforce",
+          "descripcion": "Sistema de registro de la verdad del estado final de la entrega.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": [
+            "CRM"
+          ],
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot-asignacion-manual-pl",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Asignaci\u00f3n Manual de Rutas",
+          "descripcion": "Cuello de botella y riesgo operativo en la asignaci\u00f3n inicial.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot-validacion-biometrica-pl",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Falta de Validaci\u00f3n Biom\u00e9trica",
+          "descripcion": "Riesgo de fraude masivo por verificaci\u00f3n visual de identidad.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot-rigidez-fotos-pl",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Rigidez del Flujo de Fotos",
+          "descripcion": "Dise\u00f1o inflexible que obliga a tomar fotos irrelevantes.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot-dependencia-internet-pl",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Dependencia de Conexi\u00f3n a Internet",
+          "descripcion": "Falla cr\u00edtica en el proceso de firma sin conexi\u00f3n estable.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "hotspot-activacion-manual-pl",
+          "tipo_elemento": "Hotspot",
+          "nombre": "Activaci\u00f3n Manual de Producto",
+          "descripcion": "Proceso post-entrega desconectado y manual, generando ineficiencia.",
+          "estado_comparativo": "existente",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "agregado-repositorio-datos",
+          "tipo_elemento": "Agregado",
+          "nombre": "Repositorio de Datos",
+          "descripcion": "Componente propuesto para centralizar la l\u00f3gica de sincronizaci\u00f3n y modo offline en la app.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": [
+            "Flutter"
+          ],
+          "nivel": "process_level"
+        },
+        {
+          "id": "sistema-bd-local-sql-elite",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "Base de Datos Local (SQL Elite)",
+          "descripcion": "Base de datos local propuesta para el modo offline de la aplicaci\u00f3n.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": [
+            "SQL Elite"
+          ],
+          "nivel": "process_level"
+        },
+        {
+          "id": "agregado-capa-media-apis",
+          "tipo_elemento": "Agregado",
+          "nombre": "Capa Media de APIs (Orquestador)",
+          "descripcion": "Capa de APIs propuesta para actuar como orquestador entre la app y los sistemas externos.",
+          "estado_comparativo": "modificado",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "sistema-login-monitoreo",
+          "tipo_elemento": "Sistema Externo",
+          "nombre": "Sistema de Login y Monitoreo",
+          "descripcion": "Sistema propuesto para observabilidad y monitoreo en tiempo real de la app.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "comando-activar-producto",
+          "tipo_elemento": "Comando",
+          "nombre": "Activar Producto",
+          "descripcion": "Comando para iniciar la activaci\u00f3n del producto financiero post-entrega.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        },
+        {
+          "id": "politica-automatizacion-activacion",
+          "tipo_elemento": "Pol\u00edtica",
+          "nombre": "Pol\u00edtica de Automatizaci\u00f3n de Activaci\u00f3n",
+          "descripcion": "Pol\u00edtica propuesta: Cuando Entrega Completada, entonces disparar Activar Producto.",
+          "estado_comparativo": "nuevo",
+          "tags_tecnologia": null,
+          "nivel": "process_level"
+        }
+      ],
+      "aristas": [
+        {
+          "fuente": "actor-supervisor-logistica-pl",
+          "destino": "comando-asignar-paquete",
+          "descripcion": "Ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-asignar-paquete",
+          "destino": "entidad-orden-entrega",
+          "descripcion": "Crea/Modifica",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "entidad-orden-entrega",
+          "destino": "evento-paquete-asignado",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-paquete-asignado",
+          "destino": "actor-oficial-entregas-pl",
+          "descripcion": "Es recibido por (v\u00eda app)",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "actor-oficial-entregas-pl",
+          "destino": "comando-iniciar-sesion",
+          "descripcion": "Ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-iniciar-sesion",
+          "destino": "sistema-azure-ad-pl",
+          "descripcion": "Autentica con",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "sistema-azure-ad-pl",
+          "destino": "evento-sesion-iniciada",
+          "descripcion": "Emite",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-sesion-iniciada",
+          "destino": "comando-consultar-entregas",
+          "descripcion": "Dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-consultar-entregas",
+          "destino": "evento-entregas-consultadas",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-entregas-consultadas",
+          "destino": "actor-oficial-entregas-pl",
+          "descripcion": "Actualiza vista para",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "actor-oficial-entregas-pl",
+          "destino": "comando-escanear-codigo",
+          "descripcion": "Ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-escanear-codigo",
+          "destino": "evento-codigo-escaneado",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-codigo-escaneado",
+          "destino": "comando-verificar-cliente",
+          "descripcion": "Dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-verificar-cliente",
+          "destino": "evento-cliente-verificado",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-cliente-verificado",
+          "destino": "regla-validacion-biometrica",
+          "descripcion": "Deber\u00eda cumplir con",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "actor-oficial-entregas-pl",
+          "destino": "comando-capturar-fotografia",
+          "descripcion": "Ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-capturar-fotografia",
+          "destino": "evento-evidencia-capturada",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-evidencia-capturada",
+          "destino": "politica-indexacion-evidencia",
+          "descripcion": "Activa",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "politica-indexacion-evidencia",
+          "destino": "comando-indexar-evidencia",
+          "descripcion": "Dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-indexar-evidencia",
+          "destino": "sistema-onbase-pl",
+          "descripcion": "Env\u00eda evidencia a",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "actor-cliente-pl",
+          "destino": "comando-generar-documentos",
+          "descripcion": "Requiere (v\u00eda app)",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-generar-documentos",
+          "destino": "sistema-fbdocs-pl",
+          "descripcion": "Solicita a",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "sistema-fbdocs-pl",
+          "destino": "evento-documentos-generados",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-documentos-generados",
+          "destino": "comando-solicitar-firma",
+          "descripcion": "Dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-solicitar-firma",
+          "destino": "sistema-onespan-pl",
+          "descripcion": "Solicita a",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "sistema-onespan-pl",
+          "destino": "evento-documento-firmado",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-documento-firmado",
+          "destino": "entidad-orden-entrega",
+          "descripcion": "Actualiza estado de",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "actor-oficial-entregas-pl",
+          "destino": "comando-finalizar-entrega-exitosa",
+          "descripcion": "Ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "actor-oficial-entregas-pl",
+          "destino": "comando-reportar-entrega-fallida",
+          "descripcion": "Ejecuta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-finalizar-entrega-exitosa",
+          "destino": "evento-entrega-completada",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-reportar-entrega-fallida",
+          "destino": "evento-entrega-fallida-reportada",
+          "descripcion": "Produce",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-entrega-completada",
+          "destino": "politica-actualizacion-estado",
+          "descripcion": "Activa",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "evento-entrega-fallida-reportada",
+          "destino": "politica-actualizacion-estado",
+          "descripcion": "Activa",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "politica-actualizacion-estado",
+          "destino": "comando-actualizar-estado-salesforce",
+          "descripcion": "Dispara",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "comando-actualizar-estado-salesforce",
+          "destino": "sistema-salesforce-pl",
+          "descripcion": "Env\u00eda a",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "sistema-salesforce-pl",
+          "destino": "entidad-orden-entrega",
+          "descripcion": "Actualiza estado de",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot-asignacion-manual-pl",
+          "destino": "comando-asignar-paquete",
+          "descripcion": "Impacta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot-validacion-biometrica-pl",
+          "destino": "comando-verificar-cliente",
+          "descripcion": "Impacta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot-rigidez-fotos-pl",
+          "destino": "comando-capturar-fotografia",
+          "descripcion": "Impacta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot-dependencia-internet-pl",
+          "destino": "comando-solicitar-firma",
+          "descripcion": "Impacta",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "hotspot-activacion-manual-pl",
+          "destino": "comando-activar-producto",
+          "descripcion": "Deber\u00eda ser automatizado por",
+          "estado_comparativo": "existente"
+        },
+        {
+          "fuente": "agregado-repositorio-datos",
+          "destino": "sistema-bd-local-sql-elite",
+          "descripcion": "Utiliza",
+          "estado_comparativo": "nuevo"
+        },
+        {
+          "fuente": "agregado-repositorio-datos",
+          "destino": "comando-consultar-entregas",
+          "descripcion": "Gestiona (propuesto)",
+          "estado_comparativo": "nuevo"
+        },
+        {
+          "fuente": "agregado-capa-media-apis",
+          "destino": "sistema-salesforce-pl",
+          "descripcion": "Orquesta interacci\u00f3n con",
+          "estado_comparativo": "modificado"
+        },
+        {
+          "fuente": "agregado-capa-media-apis",
+          "destino": "sistema-onbase-pl",
+          "descripcion": "Orquesta interacci\u00f3n con",
+          "estado_comparativo": "modificado"
+        },
+        {
+          "fuente": "agregado-capa-media-apis",
+          "destino": "sistema-fbdocs-pl",
+          "descripcion": "Orquesta interacci\u00f3n con",
+          "estado_comparativo": "modificado"
+        },
+        {
+          "fuente": "agregado-capa-media-apis",
+          "destino": "sistema-onespan-pl",
+          "descripcion": "Orquesta interacci\u00f3n con",
+          "estado_comparativo": "modificado"
+        },
+        {
+          "fuente": "actor-oficial-entregas-pl",
+          "destino": "sistema-login-monitoreo",
+          "descripcion": "Genera datos de uso para",
+          "estado_comparativo": "nuevo"
+        },
+        {
+          "fuente": "regla-validacion-biometrica",
+          "destino": "comando-verificar-cliente",
+          "descripcion": "Define el comportamiento de",
+          "estado_comparativo": "nuevo"
+        },
+        {
+          "fuente": "evento-entrega-completada",
+          "destino": "politica-automatizacion-activacion",
+          "descripcion": "Activa",
+          "estado_comparativo": "nuevo"
+        },
+        {
+          "fuente": "politica-automatizacion-activacion",
+          "destino": "comando-activar-producto",
+          "descripcion": "Dispara",
+          "estado_comparativo": "nuevo"
+        }
+      ]
+    }
+  ],
+  "read_models": [
+    {
+      "nombre": "Lista de Entregas del Oficial",
+      "descripcion": "Vista optimizada para el oficial de entregas, mostrando las entregas asignadas en tres columnas: En ruta, Entregado y No Entregados.",
+      "proyecta": [
+        "evento-paquete-asignado",
+        "evento-entrega-completada",
+        "evento-entrega-fallida-reportada"
+      ],
+      "ui_policies": [
+        "Mostrar entregas en ruta",
+        "Mostrar entregas entregadas",
+        "Mostrar entregas no entregadas"
+      ],
+      "tecnologias": [
+        "Flutter"
+      ]
+    },
+    {
+      "nombre": "Tablero de Activaciones Pendientes",
+      "descripcion": "Vista para el oficial de activaci\u00f3n que muestra las entregas completadas que a\u00fan no han sido activadas, permitiendo la automatizaci\u00f3n del proceso.",
+      "proyecta": [
+        "evento-entrega-completada"
+      ],
+      "ui_policies": [
+        "Actualizaci\u00f3n en tiempo real"
+      ],
+      "tecnologias": [
+        "Salesforce (reportes)",
+        "Nueva interfaz (propuesta)"
+      ]
+    }
+  ],
+  "politicas_inter_agregados": [
+    {
+      "fuente": "evento-entrega-completada",
+      "destino": "comando-activar-producto",
+      "descripcion": "Deber\u00eda disparar (automatizaci\u00f3n)",
+      "estado_comparativo": "nuevo"
+    }
+  ],
+  "responsables": [
+    "Analista"
+  ],
+  "notas": "An\u00e1lisis de dominio basado en Event Storming para la aplicaci\u00f3n FICOSA Entregas, identificando puntos cr\u00edticos y oportunidades de mejora en la digitalizaci\u00f3n de la \u00faltima milla bancaria. Se propone una evoluci\u00f3n hacia una arquitectura limpia, mayor resiliencia (modo offline), seguridad (biometr\u00eda) y observabilidad.",
+  "ddd_specs": {},
+  "transcript": ""
+}
