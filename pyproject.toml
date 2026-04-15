@@ -23,11 +23,19 @@ dependencies = [
     "py2puml==0.11.0",
     "requests>=2.32.0",
     "faster-whisper>=1.0.0",
-    "spacy>=3.8.0",
-    "es_core_news_md @ https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.8.0/es_core_news_md-3.8.0-py3-none-any.whl",
     "pandas>=2.0.0",
     "graphviz>=0.20.0",
 ]
+
+# --- CONFIGURACIÓN PARA EL CLI Y EL EMPAQUETADO ---
+[project.scripts]
+# Esto creará el comando "ddd-studio" en la terminal
+ddd-studio = "ddd_studio.cli:main" 
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+# --------------------------------------------------
 
 [dependency-groups]
 dev = [
@@ -63,7 +71,7 @@ unfixable = []
 "tests/*" = ["E501", "E402", "E741", "F821"]
 "specs/*" = ["E501", "E402", "E741"]
 # Ignore long lines in UI components (often long strings/st.markdown)
-"src/ui/*" = ["E501"]
+"src/ddd_studio/ui/*" = ["E501"]
 
 [tool.ruff.format]
 
@@ -73,3 +81,10 @@ python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
 addopts = "-v --tb=short"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ddd_studio"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/ddd_studio/.streamlit" = "ddd_studio/.streamlit"
+"src/ddd_studio/.env" = "ddd_studio/.env"

@@ -30,7 +30,7 @@ class TestProgressEventEmission:
     def test_analyze_semantics_emits_events(self, mock_inference, mock_emitter):
         from application.nodes.analyze_semantics import analyze_semantics
 
-        mock_inference.configure_response(_make_mock_analysis())
+        mock_inference.configure_step_extraction_responses()
         state = {"transcript": "test", "context": ""}
         analyze_semantics(state, inference=mock_inference, emitter=mock_emitter)
 
@@ -53,7 +53,7 @@ class TestProgressEventEmission:
         """[TS-012] Complete run produces auditable event trace."""
         from application.pipeline import AnalysisRequest, run_analysis
 
-        mock_inference.configure_response(_make_mock_analysis())
+        mock_inference.configure_step_extraction_responses()
         mock_inference.configure_text_response("specs")
 
         request = AnalysisRequest(transcript="test")

@@ -1,6 +1,0 @@
-[theme]
-base="dark"
-backgroundColor="#0E1117"        # Fondo principal
-secondaryBackgroundColor="#262730" # Fondo de la barra lateral y widgets
-textColor="#FAFAFA"               # Color del texto
-primaryColor="#FF4B4B"            # Color de acento (botones, líneas)

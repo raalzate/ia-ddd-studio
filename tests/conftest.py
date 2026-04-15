@@ -57,15 +57,69 @@ class MockInferencePort:
         self.invoke_text_calls: list[str] = []
         self._invoke_response: object = None
         self._invoke_text_response: str = ""
+        self._schema_responses: dict[type, object] = {}
 
     def configure_response(self, response: object) -> None:
         self._invoke_response = response
 
+    def configure_response_for_schema(self, schema: type, response: object) -> None:
+        """Register a canned response for a specific output_schema type."""
+        self._schema_responses[schema] = response
+
     def configure_text_response(self, response: str) -> None:
         self._invoke_text_response = response
 
+    def configure_step_extraction_responses(self) -> None:
+        """Helper to configure a valid DomainAnalysis response for single-shot extraction."""
+        from models.domain_analysis import (
+            AristaGrafo,
+            BigPicture,
+            DomainAnalysis,
+            NodoGrafo,
+        )
+
+        analysis = DomainAnalysis(
+            nombre_proyecto="Test",
+            fecha_analisis="2026-04-15",
+            big_picture=BigPicture(
+                descripcion="Mocked analysis",
+                nodos=[
+                    NodoGrafo(
+                        id="BP-ACT-User",
+                        tipo_elemento="Actor",
+                        nombre="User",
+                        descripcion="Test actor",
+                        nivel="big_picture",
+                    ),
+                    NodoGrafo(
+                        id="BP-CMD-PlaceOrder",
+                        tipo_elemento="Comando",
+                        nombre="PlaceOrder",
+                        descripcion="places an order",
+                        nivel="big_picture",
+                    ),
+                    NodoGrafo(
+                        id="BP-EVT-OrderPlaced",
+                        tipo_elemento="Evento",
+                        nombre="OrderPlaced",
+                        descripcion="order placed",
+                        nivel="big_picture",
+                    ),
+                ],
+                aristas=[
+                    AristaGrafo(fuente="BP-ACT-User", destino="BP-CMD-PlaceOrder", descripcion="ejecuta"),
+                    AristaGrafo(fuente="BP-CMD-PlaceOrder", destino="BP-EVT-OrderPlaced", descripcion="produce"),
+                ],
+            ),
+            agregados=[],
+        )
+        self.configure_response_for_schema(DomainAnalysis, analysis)
+
     def invoke(self, prompt: str, output_schema: type[T]) -> T:
         self.invoke_calls.append({"prompt": prompt, "output_schema": output_schema})
+        # Schema-specific response takes priority over catch-all
+        if output_schema in self._schema_responses:
+            return self._schema_responses[output_schema]  # type: ignore[return-value]
         return self._invoke_response  # type: ignore[return-value]
 
     def invoke_text(self, prompt: str) -> str:

@@ -36,27 +36,24 @@ def _make_mock_analysis() -> DomainAnalysis:
         agregados=[],
     )
 
-
 class TestAnalyzeSemanticsNode:
     """[TS-004] Semantic analysis node uses injected InferencePort."""
 
     def test_returns_domain_analysis(self, mock_inference):
         from application.nodes.analyze_semantics import analyze_semantics
 
-        mock_analysis = _make_mock_analysis()
-        mock_inference.configure_response(mock_analysis)
+        mock_inference.configure_step_extraction_responses()
 
         state = {"transcript": "A customer places an order", "context": ""}
         result = analyze_semantics(state, inference=mock_inference)
 
-        assert result["analysis"] is mock_analysis
         assert isinstance(result["analysis"], DomainAnalysis)
-        assert len(mock_inference.invoke_calls) == 1
+        assert len(mock_inference.invoke_calls) == 1  # single-shot extraction
 
     def test_sets_has_refine_when_context_present(self, mock_inference):
         from application.nodes.analyze_semantics import analyze_semantics
 
-        mock_inference.configure_response(_make_mock_analysis())
+        mock_inference.configure_step_extraction_responses()
 
         state = {"transcript": "test", "context": "some context doc"}
         result = analyze_semantics(state, inference=mock_inference)
@@ -66,13 +63,12 @@ class TestAnalyzeSemanticsNode:
     def test_sets_has_refine_false_when_no_context(self, mock_inference):
         from application.nodes.analyze_semantics import analyze_semantics
 
-        mock_inference.configure_response(_make_mock_analysis())
+        mock_inference.configure_step_extraction_responses()
 
         state = {"transcript": "test", "context": ""}
         result = analyze_semantics(state, inference=mock_inference)
 
         assert result["has_refine"] is False
-
 
 class TestTranscribeNode:
     """[TS-005] Transcription node uses injected TranscriptionPort."""
@@ -110,7 +106,7 @@ class TestCacheCheckNode:
 
         from application.nodes.cache_check import cache_check
 
-        key = hashlib.sha256(b"test.wav:/tmp/test.wav").hexdigest()
+        key = hashlib.sha256(b"test.wav").hexdigest()
         mock_cache.set(key, "cached transcript")
 
         state = {"audio_path": "/tmp/test.wav", "audio_name": "test.wav"}
@@ -166,27 +162,24 @@ class TestSemanticAnalysisIndependent:
         """Result must be a DomainAnalysis instance from the injected port, not a dict."""
         from application.nodes.analyze_semantics import analyze_semantics
 
-        mock_analysis = _make_mock_analysis()
-        mock_inference.configure_response(mock_analysis)
+        mock_inference.configure_step_extraction_responses()
 
         state = {"transcript": "Un cliente realiza un pedido", "context": ""}
         result = analyze_semantics(state, inference=mock_inference)
 
         assert isinstance(result["analysis"], DomainAnalysis)
-        assert result["analysis"].nombre_proyecto == "Test"
 
     def test_zero_real_api_calls(self, mock_inference):
         """Only the injected inference port should be called — no internal client creation."""
         from application.nodes.analyze_semantics import analyze_semantics
 
-        mock_inference.configure_response(_make_mock_analysis())
+        mock_inference.configure_step_extraction_responses()
 
         state = {"transcript": "workshop text", "context": ""}
         analyze_semantics(state, inference=mock_inference)
 
-        # Exactly one call to the injected port, nothing else
+        # Single-shot extraction: exactly one LLM call
         assert len(mock_inference.invoke_calls) == 1
-        assert mock_inference.invoke_calls[0]["output_schema"] is DomainAnalysis
 
     def test_no_import_of_concrete_adapter(self):
         """The node module must not import any concrete adapter class."""

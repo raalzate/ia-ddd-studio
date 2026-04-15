@@ -12,12 +12,12 @@ pytestmark = pytest.mark.offline
 
 
 class TestSettingsNoLocalModelPaths:
-    """[TS-006] src/config/settings.py must contain no local model path fields."""
+    """[TS-006] src/ddd_studio/config/settings.py must contain no local model path fields."""
 
     def test_settings_has_no_local_model_references(self):
         """Local model constants must not point to real paths or models."""
-        settings_path = pathlib.Path("src/config/settings.py")
-        assert settings_path.exists(), "src/config/settings.py must exist"
+        settings_path = pathlib.Path("src/ddd_studio/config/settings.py")
+        assert settings_path.exists(), "src/ddd_studio/config/settings.py must exist"
 
         source = settings_path.read_text()
 
@@ -30,7 +30,7 @@ class TestSettingsNoLocalModelPaths:
         ]
         for pattern in forbidden_patterns:
             assert pattern.lower() not in source.lower(), (
-                f"src/config/settings.py references local model pattern '{pattern}'"
+                f"src/ddd_studio/config/settings.py references local model pattern '{pattern}'"
             )
 
         # Legacy aliases must exist but be set to None (backward compat only)
@@ -48,13 +48,13 @@ class TestSettingsNoLocalModelPaths:
                         )
 
     def test_settings_has_google_api_key(self):
-        settings_path = pathlib.Path("src/config/settings.py")
+        settings_path = pathlib.Path("src/ddd_studio/config/settings.py")
         source = settings_path.read_text()
-        assert "GOOGLE_API_KEY" in source, "src/config/settings.py must reference GOOGLE_API_KEY"
+        assert "GOOGLE_API_KEY" in source, "src/ddd_studio/config/settings.py must reference GOOGLE_API_KEY"
 
     def test_settings_has_gemini_model(self):
-        settings_path = pathlib.Path("src/config/settings.py")
+        settings_path = pathlib.Path("src/ddd_studio/config/settings.py")
         source = settings_path.read_text()
         assert "GEMINI_MODEL" in source or "gemini" in source.lower(), (
-            "src/config/settings.py must reference Gemini model"
+            "src/ddd_studio/config/settings.py must reference Gemini model"
         )

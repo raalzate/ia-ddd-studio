@@ -16,8 +16,8 @@ AI_SKIP = pytest.mark.skipif(
 
 @pytest.fixture(scope="module")
 def llm_adapter() -> GeminiInferenceAdapter:
-    """Real Gemini adapter with temperature=0.0 for deterministic responses."""
-    return GeminiInferenceAdapter(temperature=0.0)
+    """Real Gemini adapter with hardcoded greedy decoding."""
+    return GeminiInferenceAdapter()
 
 
 @pytest.fixture(scope="module")

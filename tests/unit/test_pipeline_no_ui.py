@@ -33,32 +33,7 @@ class TestPipelineWithoutUI:
         """Pipeline invocation must work with injected mock adapters."""
         from application.pipeline import AnalysisRequest, run_analysis
 
-        # Configure mock inference to return a minimal DomainAnalysis
-        from models.domain_analysis import (
-            BigPicture,
-            DomainAnalysis,
-            NodoGrafo,
-        )
-
-        mock_analysis = DomainAnalysis(
-            nombre_proyecto="Test",
-            fecha_analisis="2026-03-18",
-            big_picture=BigPicture(
-                descripcion="Test domain",
-                nodos=[
-                    NodoGrafo(
-                        id="a1",
-                        tipo_elemento="Actor",
-                        nombre="User",
-                        descripcion="Test",
-                        nivel="big_picture",
-                    )
-                ],
-                aristas=[],
-            ),
-            agregados=[],
-        )
-        mock_inference.configure_response(mock_analysis)
+        mock_inference.configure_step_extraction_responses()
 
         request = AnalysisRequest(transcript="A customer places an order")
         result = run_analysis(

@@ -28,7 +28,6 @@ def test_inference_provider_override():
         "llm_config": {
             "model_name": "override-model",
             "api_key": "override-key",
-            "temperature": 0.5,
         }
     }
 
@@ -40,7 +39,22 @@ def test_inference_provider_override():
 
         assert config["model_name"] == "override-model"
         assert config["api_key"] == "override-key"
-        assert config["temperature"] == 0.5
+        assert "temperature" not in config
+
+
+def test_inference_provider_strips_legacy_temperature():
+    """Legacy persisted configs with `temperature` must be ignored silently."""
+    mock_state = {
+        "llm_config": {
+            "model_name": "legacy-model",
+            "api_key": "legacy-key",
+            "temperature": 0.7,
+        }
+    }
+
+    with patch("streamlit.session_state", mock_state):
+        config = InferenceProvider.get_config()
+        assert "temperature" not in config
 
 
 @patch("infra.inference_provider.GeminiInferenceAdapter")
@@ -50,14 +64,13 @@ def test_get_inference_port_uses_config(mock_adapter):
         "llm_config": {
             "model_name": "test-model",
             "api_key": "test-key",
-            "temperature": 0.3,
         }
     }
 
     with patch("streamlit.session_state", mock_state):
         InferenceProvider.get_inference_port()
 
-        mock_adapter.assert_called_once_with(model="test-model", api_key="test-key", temperature=0.3)
+        mock_adapter.assert_called_once_with(model="test-model", api_key="test-key")
 
 
 @patch("infra.inference_provider.GeminiChatAgentAdapter")
@@ -67,11 +80,10 @@ def test_get_chat_agent_port_uses_config(mock_agent):
         "llm_config": {
             "model_name": "agent-model",
             "api_key": "agent-key",
-            "temperature": 0.4,
         }
     }
 
     with patch("streamlit.session_state", mock_state):
         InferenceProvider.get_chat_agent_port()
 
-        mock_agent.assert_called_once_with(model="agent-model", api_key="agent-key", temperature=0.4)
+        mock_agent.assert_called_once_with(model="agent-model", api_key="agent-key")

@@ -97,14 +97,9 @@ class TestWorkshopSimulator:
         assert callback.call_args_list[0][0][0].turn_number == 1
         assert callback.call_args_list[1][0][0].turn_number == 2
 
-    def test_nlp_grounding_integration(self, mock_inference):
-        """Verify that nlp_extractor is called if available."""
-        # We can't easily mock spacy in this environment without affecting others,
-        # but we can verify that the Simulator handles the anchors logic.
-
+    def test_simulator_runs_without_nlp_anchors(self, mock_inference):
+        """Simulator must run end-to-end after nlp_extractor removal."""
         simulator = WorkshopSimulator(inference=mock_inference)
-        # Even if spacy is not installed, the simulator should gracefully skip
-        # or use empty anchors.
 
         result = simulator.simulate(context="Small text", num_turns=1)
         assert result.transcript != ""

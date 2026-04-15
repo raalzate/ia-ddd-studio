@@ -1,10 +1,16 @@
-"""Root conftest: add src/ to sys.path so tests can import without 'src.' prefix."""
+"""Root conftest: add src/ and src/ddd_studio/ to sys.path so tests can import
+both qualified (``ddd_studio.X``) and flat (``models.X``, ``services.X``, ...)
+module paths — matches runtime layout where ``ddd_studio/`` is on sys.path when
+Streamlit launches from the installed package directory.
+"""
 
 import re
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent / "src"))
+_SRC = Path(__file__).parent / "src"
+sys.path.insert(0, str(_SRC))
+sys.path.insert(0, str(_SRC / "ddd_studio"))
 
 # Skip BDD test files whose .feature file is missing (specs/ is not tracked in git).
 _UNIT_DIR = Path(__file__).resolve().parent / "tests" / "unit"

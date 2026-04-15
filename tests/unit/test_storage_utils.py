@@ -113,3 +113,97 @@ def test_get_manifest_path_uses_default(monkeypatch):
     monkeypatch.setattr(storage, "DRAFTS_DIR", "/tmp/drafts_test")
     result = storage.get_manifest_path()
     assert result == "/tmp/drafts_test/manifest.json"
+
+
+def test_clear_cache_dir_removes_files_and_subdirs(tmp_path):
+    from ui.utils.storage import clear_cache_dir
+
+    (tmp_path / "a.cache.json").write_text("{}")
+    (tmp_path / "b.json").write_text("{}")
+    sub = tmp_path / "nested"
+    sub.mkdir()
+    (sub / "x.json").write_text("{}")
+
+    removed = clear_cache_dir(str(tmp_path))
+    assert removed == 3
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_clear_cache_dir_noop_when_missing(tmp_path):
+    from ui.utils.storage import clear_cache_dir
+
+    missing = str(tmp_path / "nope")
+    assert clear_cache_dir(missing) == 0
+
+
+def test_clear_drafts_dir_removes_files(tmp_path):
+    from ui.utils.storage import clear_drafts_dir
+
+    (tmp_path / "d1.json").write_text("{}")
+    (tmp_path / "manifest.json").write_text("{}")
+
+    removed = clear_drafts_dir(str(tmp_path))
+    assert removed == 2
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_clear_llm_config(tmp_path, monkeypatch):
+    from ui.utils import storage
+
+    target = tmp_path / "llm_config.json"
+    target.write_text("{}")
+    monkeypatch.setattr(storage, "LLM_CONFIG_PATH", str(target))
+
+    storage.clear_llm_config()
+    assert not target.exists()
+
+
+def test_clear_all_data_wipes_everything_except_llm_config(tmp_path, monkeypatch):
+    from ui.utils import storage
+
+    static_json = tmp_path / "domain_analysis.json"
+    static_json.write_text("{}")
+    llm_config = tmp_path / "llm_config.json"
+    llm_config.write_text("{}")
+    cache_dir = tmp_path / ".cache"
+    cache_dir.mkdir()
+    (cache_dir / "a.json").write_text("{}")
+    drafts_dir = tmp_path / "drafts"
+    drafts_dir.mkdir()
+    (drafts_dir / "d.json").write_text("{}")
+
+    monkeypatch.setattr(storage, "STATIC_JSON_PATH", str(static_json))
+    monkeypatch.setattr(storage, "LLM_CONFIG_PATH", str(llm_config))
+    monkeypatch.setattr(storage, "CACHE_DIR", str(cache_dir))
+    monkeypatch.setattr(storage, "DRAFTS_DIR", str(drafts_dir))
+
+    counts = storage.clear_all_data(include_llm_config=False)
+
+    assert counts == {"static": 1, "cache": 1, "drafts": 1, "llm_config": 0}
+    assert not static_json.exists()
+    assert llm_config.exists()  # preserved
+    assert list(cache_dir.iterdir()) == []
+    assert list(drafts_dir.iterdir()) == []
+
+
+def test_clear_all_data_includes_llm_config_when_requested(tmp_path, monkeypatch):
+    from ui.utils import storage
+
+    static_json = tmp_path / "domain_analysis.json"
+    static_json.write_text("{}")
+    llm_config = tmp_path / "llm_config.json"
+    llm_config.write_text("{}")
+    cache_dir = tmp_path / ".cache"
+    cache_dir.mkdir()
+    drafts_dir = tmp_path / "drafts"
+    drafts_dir.mkdir()
+
+    monkeypatch.setattr(storage, "STATIC_JSON_PATH", str(static_json))
+    monkeypatch.setattr(storage, "LLM_CONFIG_PATH", str(llm_config))
+    monkeypatch.setattr(storage, "CACHE_DIR", str(cache_dir))
+    monkeypatch.setattr(storage, "DRAFTS_DIR", str(drafts_dir))
+
+    counts = storage.clear_all_data(include_llm_config=True)
+
+    assert counts["llm_config"] == 1
+    assert not llm_config.exists()

@@ -83,13 +83,11 @@ def test_render_ai_config(mock_st, mock_provider):
     mock_provider.get_config.return_value = {
         "model_name": "gemini-2.5-flash",
         "api_key": "test-key",
-        "temperature": 0.1,
     }
 
     mock_st.expander.return_value.__enter__ = MagicMock()
     mock_st.expander.return_value.__exit__ = MagicMock()
     mock_st.text_input.return_value = "gemini-2.5-flash"
-    mock_st.slider.return_value = 0.1
     mock_st.button.return_value = False
 
     _render_ai_config()
