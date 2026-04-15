@@ -86,5 +86,9 @@ addopts = "-v --tb=short"
 packages = ["src/ddd_studio"]
 
 [tool.hatch.build.targets.wheel.force-include]
+# Streamlit config ships with the wheel. `.env` is intentionally NOT
+# force-included: it holds secrets (GOOGLE_API_KEY, etc.) and is gitignored,
+# so force-including it would break any build on a machine that doesn't have
+# a local `.env` (CI, fresh clones). Users set env vars directly or drop an
+# `.env` next to their install.
 "src/ddd_studio/.streamlit" = "ddd_studio/.streamlit"
-"src/ddd_studio/.env" = "ddd_studio/.env"
