@@ -5,8 +5,10 @@
 DDD Studio is an interactive domain analysis and Event Storming workbench for software architects
 and domain experts. It combines AI-powered visual modeling with structured knowledge extraction
 to design, validate, and document complex software systems using Domain-Driven Design (DDD)
-principles. The application ingests audio recordings, transcriptions, and documents, then
-automatically extracts domain elements and renders them as interactive, editable graphs.
+principles. The application ingests audio recordings, transcriptions, and PDF documents, then
+produces a canonicalized `DomainAnalysis` (Actors, Commands, Events, Policies, Aggregates,
+Read Models) rendered as an interactive graph that can be refined through a conversational
+Gemini-powered agent.
 
 ## Who
 
@@ -18,10 +20,11 @@ automatically extracts domain elements and renders them as interactive, editable
 
 Translating tacit business knowledge into precise DDD models is labor-intensive, error-prone,
 and often stalls when no facilitator is available. DDD Studio automates the extraction of
-domain elements (Commands, Events, Aggregates, Policies) from unstructured input — workshop
-recordings, PDFs, stakeholder interviews — and applies an AI "Senior Architect" agent to
-surface logical gaps, missing integrations, and orphaned events, accelerating the path from
-discovery to a validated domain model.
+domain elements (Actors, Commands, Events, Policies, Aggregates, Read Models) from unstructured
+input — workshop recordings, PDFs, stakeholder interviews — validates the resulting graph
+against DDD invariants, and exposes an AI "Senior Architect" agent to surface logical gaps,
+missing integrations, and orphaned events, accelerating the path from discovery to a validated
+domain model.
 
 ## Domain
 
@@ -30,20 +33,31 @@ discovery to a validated domain model.
 - **Command**: intent to change system state (verb form, e.g., "PlaceOrder").
 - **Domain Event**: fact that something occurred (past tense, e.g., "OrderPlaced").
 - **Policy**: reaction rule — "whenever Event X occurs, do Command Y".
+- **Read Model**: denormalized projection consumed by queries/UI.
 - **Bounded Context**: explicit boundary within which a domain model applies.
-- **TOON Format**: compressed context representation for efficient LLM consumption.
+- **Ubiquitous Language**: the canonical vocabulary the tool enforces across the graph.
 
 ## Scope
 
 **In scope:**
-- Audio transcription and NLP-based domain element extraction (via Whisper + LLM).
+- Audio transcription via `FasterWhisperTranscriptionAdapter` (local) or
+  `GoogleTranscriptionAdapter` (remote), selected by `WHISPER_MODEL`.
 - PDF/document ingestion for requirements and specification parsing.
-- Automated generation of Event Storming graphs (nodes: Commands, Events, Aggregates, Policies).
-- AI "Senior Architect" chat agent for domain inconsistency analysis.
-- Live graph editing (nodes and edges) in the UI.
-- Structural analysis (complexity, coupling, cohesion metrics).
+- Single-shot LLM extraction of Event Storming elements (Actors, Commands, Events,
+  Policies, Aggregates, Read Models) via Gemini.
+- Structural validation of the resulting graph (`integrity_validator`) and ID
+  canonicalisation / deduplication (`analysis_normalizer`).
+- Deterministic caching of analyses keyed by `(transcript, model_name)` hash.
+- Inter-agent workshop simulation (`WorkshopSimulator`) that synthesises
+  facilitator/expert transcripts from a domain description.
+- Conversational "Senior Architect" chat agent (ReAct) with tool-calling to mutate
+  the graph (add/remove/rename nodes, refine aggregates) from the UI.
+- Persistent generation history via `DraftService` + `FileDraftRepository`.
+- Artefact export: Mermaid, PlantUML, PDF, and Gherkin-style specifications.
 
 **Out of scope:**
 - Code generation from domain models.
 - Direct database schema creation or ORM mapping.
 - Multi-tenant / SaaS deployment infrastructure.
+- Byte-for-byte deterministic LLM output (the system promises *semantic*
+  stability via greedy decoding + caching, not bit-identical responses).
