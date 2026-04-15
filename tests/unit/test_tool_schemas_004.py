@@ -42,9 +42,8 @@ class TestAmbiguity:
             assert amb.type == t
 
     def test_rejects_invalid_type(self):
-        from pydantic import ValidationError
-
         from domain.models.tool_schemas import Ambiguity
+        from pydantic import ValidationError
 
         with pytest.raises(ValidationError):
             Ambiguity(
@@ -57,9 +56,8 @@ class TestAmbiguity:
             )
 
     def test_rejects_invalid_priority(self):
-        from pydantic import ValidationError
-
         from domain.models.tool_schemas import Ambiguity
+        from pydantic import ValidationError
 
         with pytest.raises(ValidationError):
             Ambiguity(
@@ -173,9 +171,8 @@ class TestRefinementPlan:
             assert plan.status == status
 
     def test_rejects_invalid_status(self):
-        from pydantic import ValidationError
-
         from domain.models.tool_schemas import RefinementPlan
+        from pydantic import ValidationError
 
         with pytest.raises(ValidationError):
             RefinementPlan(
@@ -227,9 +224,8 @@ class TestRefinementSession:
         assert session.plans == []
 
     def test_model_hash_required(self):
-        from pydantic import ValidationError
-
         from domain.models.tool_schemas import RefinementSession
+        from pydantic import ValidationError
 
         with pytest.raises(ValidationError):
             RefinementSession()

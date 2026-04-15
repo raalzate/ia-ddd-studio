@@ -1,5 +1,4 @@
 import pandas as pd
-
 from models.domain_analysis import DomainAnalysis
 
 

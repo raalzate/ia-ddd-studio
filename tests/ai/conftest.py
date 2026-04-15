@@ -5,7 +5,6 @@ from __future__ import annotations
 import os
 
 import pytest
-
 from infra.adapters.gemini_inference import GeminiInferenceAdapter
 
 AI_SKIP = pytest.mark.skipif(

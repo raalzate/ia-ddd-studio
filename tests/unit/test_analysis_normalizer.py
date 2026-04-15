@@ -26,7 +26,6 @@ from services.analysis_normalizer import (
     repair_project_name,
 )
 
-
 # --- canonical_id ---------------------------------------------------------
 
 
@@ -64,14 +63,13 @@ class TestCanonicalId:
 
 class TestRepairProjectName:
     def test_keeps_well_formed_natural_text(self):
-        assert repair_project_name("Digitalización última milla bancaria", "transcript") == \
-            "Digitalización última milla bancaria"
+        assert (
+            repair_project_name("Digitalización última milla bancaria", "transcript")
+            == "Digitalización última milla bancaria"
+        )
 
     def test_repairs_pascal_case_leak(self):
-        transcript = (
-            "hablemos de la digitalización última milla bancaria. "
-            "Es un proceso complejo."
-        )
+        transcript = "hablemos de la digitalización última milla bancaria. Es un proceso complejo."
         result = repair_project_name("DigitalizarUltimaMillaBanco", transcript)
         assert "Digitaliza" in result
         assert "Banco" not in result.split()[0:1]  # not the malformed PascalCase

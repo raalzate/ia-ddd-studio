@@ -5,7 +5,6 @@ from __future__ import annotations
 from unittest.mock import MagicMock, mock_open, patch
 
 import pytest
-
 from services.transcription_service import transcribe_audio
 
 

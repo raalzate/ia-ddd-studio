@@ -4,7 +4,6 @@ Tests the pure graph-building logic (no Streamlit rendering).
 """
 
 import graphviz
-
 from models.domain_analysis import (
     AristaGrafo,
     BigPicture,

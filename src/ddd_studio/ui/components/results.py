@@ -1,7 +1,6 @@
 import json
 
 import streamlit as st
-
 from models.domain_analysis import DomainAnalysis
 from ui.analyze import analyze_domain_data
 from ui.components.chat import render_chat_tab
@@ -63,7 +62,7 @@ def _render_data_tab(analysis_obj: DomainAnalysis, data: dict):
         edited_rms = st.data_editor(dfs["read_models_df"], key="edit_rms", num_rows="dynamic", width="stretch")
 
     st.write("")
-    if st.button("💾 Guardar y Aplicar Cambios", type="primary", width='content'):
+    if st.button("💾 Guardar y Aplicar Cambios", type="primary", width="content"):
         try:
             modified = reconstruct_domain_analysis(
                 data,

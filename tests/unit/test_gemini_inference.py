@@ -5,10 +5,9 @@ from __future__ import annotations
 from unittest.mock import MagicMock, patch
 
 import pytest
-from pydantic import BaseModel
-
 from domain.exceptions import ServiceUnavailableError
 from infra.adapters.gemini_inference import GeminiInferenceAdapter
+from pydantic import BaseModel
 
 
 class MockModel(BaseModel):

@@ -3,7 +3,6 @@ import warnings
 
 import streamlit as st
 
-from ddd_studio.config.settings import load_api_key
 from ddd_studio.models.domain_analysis import DomainAnalysis
 from ddd_studio.ui.components.input import render_input_tabs
 from ddd_studio.ui.components.results import render_results_tabs
@@ -16,9 +15,7 @@ warnings.filterwarnings("ignore", message="FP16 is not supported on CPU")
 # Silence Streamlit's "missing ScriptRunContext" warnings emitted by the
 # LangGraph worker threads running the parallel extraction DAG. These are
 # benign — we handle them explicitly via try/except in on_event.
-logging.getLogger(
-    "streamlit.runtime.scriptrunner_utils.script_run_context"
-).setLevel(logging.ERROR)
+logging.getLogger("streamlit.runtime.scriptrunner_utils.script_run_context").setLevel(logging.ERROR)
 
 
 @st.cache_resource

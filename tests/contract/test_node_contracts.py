@@ -99,6 +99,7 @@ class TestGraphNodeRegistry:
 
     def test_all_contracts_have_graph_nodes(self):
         from application.graph_builder import build_text_graph, get_all_contracts
+
         from tests.conftest import MockInferencePort
 
         contracts = get_all_contracts()

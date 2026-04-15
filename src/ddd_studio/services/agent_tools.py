@@ -10,9 +10,8 @@ import json
 import re
 from typing import Literal
 
-from langchain_core.tools import tool
-
 from domain.models.tool_schemas import ToolResult
+from langchain_core.tools import tool
 from models.domain_analysis import AristaGrafo, NodoGrafo
 from services.model_accessor import ModelAccessor
 

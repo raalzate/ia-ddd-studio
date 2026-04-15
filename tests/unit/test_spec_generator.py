@@ -5,7 +5,6 @@ from __future__ import annotations
 from unittest.mock import MagicMock
 
 import pytest
-
 from models.domain_analysis import BigPicture, DomainAnalysis
 from services.spec_generator import SpecGenerator
 

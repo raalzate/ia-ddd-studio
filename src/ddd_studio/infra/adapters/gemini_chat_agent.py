@@ -9,16 +9,15 @@ import json
 import logging
 from typing import Any
 
+from domain.models.tool_schemas import AgentResponse, ToolExecution
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
+from services.model_accessor import ModelAccessor
 from tenacity import (
     retry,
     retry_if_exception,
     stop_after_attempt,
     wait_exponential_jitter,
 )
-
-from domain.models.tool_schemas import AgentResponse, ToolExecution
-from services.model_accessor import ModelAccessor
 
 MAX_ITERATIONS = 5
 
@@ -66,9 +65,8 @@ class GeminiChatAgentAdapter:
     def _llm(self) -> Any:
         """Lazy-loaded LLM instance with hardcoded greedy decoding."""
         if self._llm_instance is None:
-            from langchain_google_genai import ChatGoogleGenerativeAI
-
             from domain.exceptions import ConfigurationError
+            from langchain_google_genai import ChatGoogleGenerativeAI
 
             if not self._api_key:
                 raise ConfigurationError(

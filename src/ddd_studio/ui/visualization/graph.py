@@ -10,7 +10,6 @@ import html as _html
 import graphviz
 import streamlit as st
 import streamlit.components.v1 as components
-
 from models.domain_analysis import DomainAnalysis
 
 # ── Event Storming canonical palette ─────────────────────────────────────

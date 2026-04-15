@@ -9,9 +9,9 @@ import os
 from unittest.mock import MagicMock, patch
 
 import pytest
+from domain.exceptions import TranscriptionError
 from pytest_bdd import given, parsers, scenarios, then, when
 
-from domain.exceptions import TranscriptionError
 from tests.conftest import FEATURE_006_DIR
 
 scenarios(os.path.join(FEATURE_006_DIR, "local-transcription.feature"))

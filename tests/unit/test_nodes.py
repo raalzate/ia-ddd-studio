@@ -36,6 +36,7 @@ def _make_mock_analysis() -> DomainAnalysis:
         agregados=[],
     )
 
+
 class TestAnalyzeSemanticsNode:
     """[TS-004] Semantic analysis node uses injected InferencePort."""
 
@@ -69,6 +70,7 @@ class TestAnalyzeSemanticsNode:
         result = analyze_semantics(state, inference=mock_inference)
 
         assert result["has_refine"] is False
+
 
 class TestTranscribeNode:
     """[TS-005] Transcription node uses injected TranscriptionPort."""

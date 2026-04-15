@@ -7,9 +7,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from pydantic import BaseModel, Field, model_validator
-
 from models.domain_analysis import DomainAnalysis
+from pydantic import BaseModel, Field, model_validator
 
 
 @dataclass

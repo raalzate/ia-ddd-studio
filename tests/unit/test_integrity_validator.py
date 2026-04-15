@@ -96,9 +96,7 @@ class TestReadModels:
                 _node("BP-EVT-X", "Evento"),
             ],
             edges=[_edge("BP-CMD-X", "BP-EVT-X")],
-            read_models=[
-                ReadModel(nombre="V", descripcion="x", proyecta=["BP-EVT-NOTEXIST"])
-            ],
+            read_models=[ReadModel(nombre="V", descripcion="x", proyecta=["BP-EVT-NOTEXIST"])],
         )
         issues = validate(analysis)
         assert any(i.code == "dangling_read_model_projection" for i in issues)

@@ -1,7 +1,6 @@
 import uuid
 
 import streamlit as st
-
 from config.settings import LLM_MODEL
 from prompts import registry
 from ui.components.context import render_context_fields

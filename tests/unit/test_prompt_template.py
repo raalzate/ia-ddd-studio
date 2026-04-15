@@ -7,7 +7,6 @@ Test IDs: TS-003, TS-004, TS-005, TS-006, TS-007, TS-008, TS-009, TS-010, TS-011
 from __future__ import annotations
 
 import pytest
-
 from prompts.errors import MissingVariableError
 from prompts.template import PromptTemplate, RenderedPrompt
 

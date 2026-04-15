@@ -8,10 +8,10 @@ from __future__ import annotations
 import uuid
 
 import pytest
-from pytest_bdd import given, parsers, scenarios, then, when
-
 from domain.models.draft import Draft, DraftManifestEntry
+from pytest_bdd import given, parsers, scenarios, then, when
 from services.draft_service import DraftService
+
 from tests.conftest import FEATURE_005_DIR, _make_sample_domain_analysis
 
 scenarios(f"{FEATURE_005_DIR}/draft-service-contract.feature")

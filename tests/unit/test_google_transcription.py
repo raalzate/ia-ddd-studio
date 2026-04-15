@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pytest
-
 from domain.exceptions import FileTooLargeError
 from infra.adapters.google_transcription import GoogleTranscriptionAdapter
 

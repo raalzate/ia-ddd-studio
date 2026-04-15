@@ -2,7 +2,6 @@
 
 import pandas as pd
 import pytest
-
 from ui.analyze import analyze_domain_data
 
 

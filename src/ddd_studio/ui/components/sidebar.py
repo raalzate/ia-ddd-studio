@@ -1,5 +1,4 @@
 import streamlit as st
-
 from infra.inference_provider import InferenceProvider
 from models.domain_analysis import DomainAnalysis
 from ui.utils.storage import clear_all_data
@@ -186,9 +185,7 @@ def _render_ai_config():
             help="Tu clave de API de Google AI Studio",
         )
 
-        st.caption(
-            "🪓 Decoding: greedy fijo (temperature=0.0, top_k=1). "
-        )
+        st.caption("🪓 Decoding: greedy fijo (temperature=0.0, top_k=1). ")
 
         if st.button("💾 Guardar Configuración", width="stretch"):
             cfg = {

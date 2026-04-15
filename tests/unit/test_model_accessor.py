@@ -5,7 +5,6 @@ on the DomainAnalysis model via a session-state-like dict wrapper.
 """
 
 import pytest
-
 from models.domain_analysis import (
     AristaGrafo,
     BigPicture,

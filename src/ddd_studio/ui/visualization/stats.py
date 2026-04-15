@@ -1,5 +1,4 @@
 import streamlit as st
-
 from models.domain_analysis import DomainAnalysis
 from ui.analyze import analyze_domain_data
 
@@ -39,8 +38,8 @@ def render_stats_tab(analysis_obj: DomainAnalysis):
             node_types_df = node_types_df.sort_values("count", ascending=False).reset_index(drop=True)
 
             st.markdown("**Distribución de Elementos**")
-            st.dataframe(node_types_df, hide_index=True, width='content')
+            st.dataframe(node_types_df, hide_index=True, width="content")
     with col2:
         if "technologies_df" in dfs and not dfs["technologies_df"].empty:
             st.markdown("**Tecnologías Identificadas**")
-            st.dataframe(dfs["technologies_df"], hide_index=True, width='content')
+            st.dataframe(dfs["technologies_df"], hide_index=True, width="content")

@@ -6,7 +6,6 @@ import json
 import os
 
 import pytest
-
 from infra.adapters.gemini_inference import GeminiInferenceAdapter
 from models.domain_analysis import DomainAnalysis
 from prompts.catalog import registry

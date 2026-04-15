@@ -8,11 +8,10 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from pydantic import BaseModel, Field, model_validator
-
 from application.graph_builder import build_audio_graph, build_text_graph
 from domain.events import ErrorEvent, ProgressEvent
 from models.domain_analysis import DomainAnalysis
+from pydantic import BaseModel, Field, model_validator
 
 
 class AnalysisRequest(BaseModel):

@@ -9,10 +9,10 @@ import uuid
 from datetime import datetime, timedelta, timezone
 
 import pytest
-from pytest_bdd import given, parsers, scenarios, then, when
-
 from domain.models.draft import Draft, DraftSummary, compute_summary
 from models.domain_analysis import DomainAnalysis
+from pytest_bdd import given, parsers, scenarios, then, when
+
 from tests.conftest import FEATURE_005_DIR, _make_sample_domain_analysis
 
 scenarios(f"{FEATURE_005_DIR}/draft-model-validation.feature")

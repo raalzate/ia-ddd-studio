@@ -6,7 +6,6 @@ Renders the snapshot fields in a non-editable format using Streamlit expanders.
 from __future__ import annotations
 
 import streamlit as st
-
 from domain.models.draft import Draft
 
 

@@ -9,10 +9,10 @@ import uuid
 from datetime import datetime, timezone
 
 import pytest
-from pytest_bdd import given, scenarios, then, when
-
 from infra.adapters.file_draft_repository import FileDraftRepository
+from pytest_bdd import given, scenarios, then, when
 from services.draft_service import DraftService
+
 from tests.conftest import FEATURE_005_DIR, _make_sample_domain_analysis
 
 scenarios(f"{FEATURE_005_DIR}/us1-draft-auto-creation.feature")

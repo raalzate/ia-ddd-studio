@@ -13,7 +13,7 @@ import time
 import types
 from typing import TypeVar, get_args, get_origin
 
-from langchain_core.rate_limiters import InMemoryRateLimiter
+from domain.exceptions import ConfigurationError, ServiceUnavailableError
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import create_model
 from tenacity import (
@@ -22,8 +22,6 @@ from tenacity import (
     stop_after_attempt,
     wait_exponential_jitter,
 )
-
-from domain.exceptions import ConfigurationError, ServiceUnavailableError
 
 T = TypeVar("T")
 
@@ -77,10 +75,7 @@ class GeminiInferenceAdapter:
         """Lazy-loaded LLM instance with hardcoded greedy decoding."""
         if self._llm_instance is None:
             if not self._api_key:
-                raise ConfigurationError(
-                    "Google API Key is missing. "
-                    "Please set GOOGLE_API_KEY environment variable."
-                )
+                raise ConfigurationError("Google API Key is missing. Please set GOOGLE_API_KEY environment variable.")
             self._llm_instance = ChatGoogleGenerativeAI(
                 model=self._model_name,
                 google_api_key=self._api_key,
@@ -95,28 +90,28 @@ class GeminiInferenceAdapter:
         """Send prompt and return structured output."""
         # Sleep de 5 segundos para evitar saturar la API en llamadas paralelas
         time.sleep(5)
-        
+
         start_time = time.time()
         schema_name = getattr(output_schema, "__name__", str(output_schema))
-        
+
         try:
             if isinstance(output_schema, types.GenericAlias) and get_origin(output_schema) is list:
                 item_type = get_args(output_schema)[0]
                 wrapper = create_model("_ListWrapper", items=(list[item_type], ...))
                 structured_llm = self._llm.with_structured_output(wrapper)
                 result = structured_llm.invoke(prompt)
-                
+
                 duration = time.time() - start_time
                 print(f"      [LLM] Extracción finalizada ({schema_name}) en {duration:.1f}s")
                 return result.items  # type: ignore[return-value]
-            
+
             structured_llm = self._llm.with_structured_output(output_schema)
             result = structured_llm.invoke(prompt)
-            
+
             duration = time.time() - start_time
             print(f"      [LLM] Extracción finalizada ({schema_name}) en {duration:.1f}s")
             return result
-            
+
         except Exception as e:
             if "unavailable" in str(e).lower() or "connection" in str(e).lower():
                 raise ServiceUnavailableError(str(e)) from e
@@ -127,7 +122,7 @@ class GeminiInferenceAdapter:
         """Send prompt and return raw text response."""
         # Sleep de 1 segundos para evitar saturar la API en llamadas paralelas
         time.sleep(1)
-        
+
         start_time = time.time()
         try:
             response = self._llm.invoke(prompt)

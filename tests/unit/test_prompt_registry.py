@@ -7,7 +7,6 @@ Test IDs: TS-014, TS-015, TS-016, TS-017
 from __future__ import annotations
 
 import pytest
-
 from prompts.errors import DuplicateTemplateError, TemplateNotFoundError
 from prompts.registry import PromptRegistry
 from prompts.template import PromptTemplate

@@ -1,7 +1,6 @@
 import json
 
 import streamlit as st
-
 from models.domain_analysis import DomainAnalysis
 from prompts import registry
 

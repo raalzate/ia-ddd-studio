@@ -7,7 +7,6 @@ from unittest.mock import MagicMock, patch
 @patch("ui.visualization.stats.st")
 def test_render_stats_tab_runs_without_error(mock_st, mock_analyze, sample_domain_analysis):
     import pandas as pd
-
     from ui.visualization.stats import render_stats_tab
 
     # Mock analyze_domain_data to return expected DataFrames
@@ -29,7 +28,6 @@ def test_render_stats_tab_runs_without_error(mock_st, mock_analyze, sample_domai
 @patch("ui.visualization.stats.st")
 def test_render_stats_tab_handles_empty_data(mock_st, mock_analyze, sample_domain_analysis):
     import pandas as pd
-
     from ui.visualization.stats import render_stats_tab
 
     mock_analyze.return_value = {

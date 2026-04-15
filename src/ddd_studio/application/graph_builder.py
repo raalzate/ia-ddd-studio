@@ -7,9 +7,6 @@ Builds the agent pipeline graph with typed AgentState.
 import functools
 from typing import Any, Literal
 
-from langgraph.graph import END, StateGraph
-from typing_extensions import TypedDict
-
 from application.nodes.analyze_semantics import CONTRACT as ANALYZE_CONTRACT
 from application.nodes.analyze_semantics import analyze_semantics
 from application.nodes.cache_check import CONTRACT as CACHE_CONTRACT
@@ -19,6 +16,8 @@ from application.nodes.refine_analysis import refine_analysis
 from application.nodes.transcribe import CONTRACT as TRANSCRIBE_CONTRACT
 from application.nodes.transcribe import transcribe
 from domain.models.agent_state import NodeContract
+from langgraph.graph import END, StateGraph
+from typing_extensions import TypedDict
 
 
 class _PipelineState(TypedDict):
@@ -87,7 +86,9 @@ def build_audio_graph(
 
     # Bind dependencies to nodes via functools.partial
     workflow.add_node("cache_check", functools.partial(cache_check, cache=cache, emitter=emitter))
-    workflow.add_node("transcribe", functools.partial(transcribe, transcription=transcription, cache=cache, emitter=emitter))
+    workflow.add_node(
+        "transcribe", functools.partial(transcribe, transcription=transcription, cache=cache, emitter=emitter)
+    )
     workflow.add_node(
         "analyze_semantics",
         functools.partial(analyze_semantics, inference=inference, cache=cache, emitter=emitter),

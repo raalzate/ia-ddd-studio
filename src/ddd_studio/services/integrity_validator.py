@@ -72,10 +72,7 @@ def validate(analysis: DomainAnalysis) -> list[IntegrityIssue]:
 
         # Every Aggregate SHOULD be the target/source of ≥1 command/event edge.
         if tipo == "Agregado":
-            touches = any(
-                e.fuente == node.id or e.destino == node.id
-                for e in analysis.big_picture.aristas
-            )
+            touches = any(e.fuente == node.id or e.destino == node.id for e in analysis.big_picture.aristas)
             if not touches:
                 issues.append(
                     IntegrityIssue(

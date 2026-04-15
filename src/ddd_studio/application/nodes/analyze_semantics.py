@@ -62,7 +62,6 @@ def analyze_semantics(
         )
         from services.analysis_normalizer import normalize_analysis
         from services.integrity_validator import summarize, validate
-       
 
         model_name = getattr(inference, "_model_name", None) or type(inference).__name__
         cache_key = compute_analysis_cache_key(transcript, model_name)
@@ -85,7 +84,6 @@ def analyze_semantics(
             }
 
         annotated_transcript = transcript
-        
 
         prompt = registry.get("semantic_analysis").render(transcript=annotated_transcript).to_string()
 
@@ -100,7 +98,7 @@ def analyze_semantics(
 
         analysis: DomainAnalysis = inference.invoke(prompt, DomainAnalysis)
         analysis = normalize_analysis(analysis, transcript)
-        store_analysis(cache, cache_key, analysis)       
+        store_analysis(cache, cache_key, analysis)
 
         issues = validate(analysis)
         counts = summarize(issues)

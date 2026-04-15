@@ -2,10 +2,9 @@ import functools
 import json
 from collections.abc import Iterator
 
+from config.settings import WHISPER_MODEL
 from faster_whisper import WhisperModel
 from langgraph.config import get_stream_writer
-
-from config.settings import WHISPER_MODEL
 from models.event_storming_state import EventStormingState
 
 

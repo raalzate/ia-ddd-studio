@@ -73,6 +73,7 @@ class TestErrorEventEmission:
 
     def test_service_unavailable_emits_error_event(self, mock_emitter):
         from application.nodes.analyze_semantics import analyze_semantics
+
         from tests.conftest import MockInferencePort
 
         class FailingInference(MockInferencePort):
@@ -96,6 +97,7 @@ class TestErrorEventEmission:
     def test_file_too_large_emits_error_event(self, mock_emitter):
         from application.nodes.transcribe import transcribe
         from domain.exceptions import FileTooLargeError
+
         from tests.conftest import MockTranscriptionPort
 
         class FailingTranscription(MockTranscriptionPort):

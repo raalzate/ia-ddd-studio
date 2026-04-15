@@ -17,6 +17,7 @@ from datetime import datetime, timedelta, timezone
 def _make_draft(project_name="TestProject", generation_id=None, created_at=None):
     """Build a valid Draft instance for repository tests."""
     from domain.models.draft import Draft, DraftSummary
+
     from tests.conftest import _make_sample_domain_analysis
 
     now = created_at or datetime.now(timezone.utc)
