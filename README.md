@@ -24,6 +24,11 @@ Convierte transcripciones de talleres (audio o texto) y documentación técnica 
 
 ## Instalación y configuración
 
+```
+uv tool install git+https://github.com/raalzate/ia-ddd-studio.git
+ddd-studio
+```
+
 ### Requisitos
 *   Python **3.10.9+**
 *   API Key de **Google Gemini** (AI Studio).
